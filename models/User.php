@@ -3,7 +3,7 @@
 class User{
 
     // DB stuff
-    private $table = 'users';
+    //private $table = 'users';
 
     // properties
     public $id;

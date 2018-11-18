@@ -1,21 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MiConnect</title>
+
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="../include/bootstrap/bootstrap-lumen.min.css">
+</head>
+<body>
+    
 <?php
+    include '../views/components/_navbar.php';
+?>
 
-include '../config/Database.php';
-include '../controllers/UserController.php';
-include '../models/User.php';
 
-class ViewUser extends UserController{
-
-    public function showUsers(){
-
-        $datas = $this->getUsers();
-
-        foreach ($datas as $data) {
-            echo $data['contact']. '<br>';
-        }
-    }
-}
-
-$viewUser = new ViewUser();
-
-$viewUser->showUsers();
+    <!--Jquery and BootstrapJs-->
+    <script src="../include/js/jquery.js"> </script>
+    <script src="../include/bootstrap/js/bootstrap.min.js"> </script>
+</body>
+</html>

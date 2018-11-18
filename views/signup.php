@@ -36,7 +36,7 @@
 	<h2>Sign Up</h2>
 	<div class="w3layouts">
 		<div class="photos-upload-view">
-			<form action="#" method="POST" class="simple-form" name="registration">
+			<form action="/MiConnect/actions/user/signupAction.php" method="POST" class="simple-form" name="registration">
 					<div class="agileinfo">
 					</div>
 						<div class="agileinfo-row">
@@ -181,14 +181,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-								
-							
-							
-							
-                            
-                            <div class="ferry ferry-from">
-								<input type="hidden" name="imageName" value="default_User.png" disabled>
                             </div>
 
 							<div class="clear"></div>
