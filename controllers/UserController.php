@@ -63,5 +63,31 @@ class UserController extends Database{
       return false;
     }
   }
+
+  public function signin(User $user){
+    $query = 'select * from users 
+              where 
+              user_name = :user_name
+              and
+              password = :password';
+
+    // preparing statement
+    $stmt = $this->connect()->prepare($query);
+
+    // encrypting password
+    $pwd_enc = md5($user->password);
+
+    // binding parameters
+    $stmt->bindParam(':user_name', $user->user_name);
+    $stmt->bindParam(':password', $pwd_enc);
+
+  
+    // Execute query
+    if($stmt->execute()) {
+      return $stmt;
+    }
+
+    return false;
+  }
 }
 
