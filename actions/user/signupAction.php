@@ -27,14 +27,6 @@ if(isset($_POST['submit'])){
 
     $result = $action->signup($user);
 
-    if($result){
-        // signup success
-        include '../../views/components/signup/signup_success.php';
-    }
-    else{
-        // signup failed
-        include '../../views/components/signup/signup_error.php';
-    }
+    echo json_encode( array("message"=> $result) );
 
-    
 }

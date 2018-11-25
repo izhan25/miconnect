@@ -81,7 +81,40 @@ messages: {
 // Make sure the form is submitted to the destination defined
 // in the "action" attribute of the form when valid
 submitHandler: function(form) {
-    form.submit();
+
+    $.ajax({
+        type: "POST",
+        url: "/MiConnect/actions/user/signupAction.php",
+        data: {
+            userName : $('#userName').val(),
+            fullName : $('#fullName').val(),
+            email : $('#email').val(),
+            contact : $('#contact').val(),
+            password : $('#password').val(),
+            gender : $('#signupForm input[name=gender]').val(),
+            date : $('#date').val(),
+            month : $('#month').val(),
+            year : $('#year').val(),
+            submit : 'submit'
+        },
+        dataType:'JSON', 
+        success: function(response){
+            $('#signupRES').html(response.message);
+            if(response.message == 'You Have Successfully Signed Up'){
+                $('#signupMessageBox').removeClass("error-validation");
+                $('#signupMessageBox').addClass("success-validation");
+            }
+            if(response.message == 'Email already exist.' || response.message == ' User Name already exist.' || response.message == 'Email User Name already exist.'){
+                $('#signupMessageBox').removeClass("success-validation");
+                $('#signupMessageBox').addClass("error-validation");
+            }
+        },
+        error: function(e){
+            $('#signupRES').html(e.responseText);
+        }
+    });
+    
+    //form.submit();
 }
 });
 });

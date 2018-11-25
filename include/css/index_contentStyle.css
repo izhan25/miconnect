@@ -34,3 +34,24 @@ footer{
     margin-top: 200px;
 }
 
+/* validation messages for signin and signup*/
+.message{
+    opacity: 0.1px; 
+    font-size: 18px; 
+    margin: 10px 10px; 
+}
+.message label {
+    margin: 0 auto;
+}
+.success-validation{
+    background-color: #28a745;
+    opacity: 0.5;
+    color: white;
+}
+.error-validation{
+    background-color: #dc3545;
+    opacity: 0.5;
+    color: white;
+}
+
+

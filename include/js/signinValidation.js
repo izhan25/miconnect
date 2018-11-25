@@ -47,10 +47,17 @@ $(function() {
             dataType:'JSON', 
             success: function(response){
                 $('#signinRES').html(response.message);
-                // put on console what server sent back...
+                if(response.message == 'User Not Found'){
+                    $('#signinMessageBox').removeClass("success-validation");
+                    $('#signinMessageBox').addClass("error-validation");
+                }
+                if(response.message == 'Signed In'){
+                    $('#signinMessageBox').removeClass("error-validation");
+                    $('#signinMessageBox').addClass("success-validation");
+                }
             },
             error: function(e){
-                $('#signinRES').html(response.message);
+                $('#signinRES').html(e.responseText);
             }
         });
         

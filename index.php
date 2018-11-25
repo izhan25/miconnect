@@ -49,11 +49,11 @@
                             <input type="password" id="signinPWD" name="password" class="form-control" placeholder="Enter Your Password Here">
                         </div>
                         <div class="form-group">
-                            <input type="submit" id="signin" name="signin" value="Sign In" class="btn btn-index btn-block btn-primary mt-4 mb-2">
+                            <input type="submit" id="signin" name="signin" value="Sign In" class="btn btn-index btn-block btn-primary mt-4">
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer message" id="signinMessageBox">
                     <label id="signinRES"></label>
                 </div>
             </div>
@@ -71,26 +71,26 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="/MiConnect/actions/user/signupAction.php" method="POST" name="registration">
+                    <form action="/MiConnect/actions/user/signupAction.php" id="signupForm" method="POST" name="registration">
                         <div class="form-group">
                             <label>User Name</label>
-                            <input type="text" name="userName" placeholder=""  autocomplete="off" autofocus="on" class="form-control">
+                            <input type="text" id="userName" name="userName" placeholder=""  autocomplete="off" autofocus="on" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>Full Name</label>
-                            <input type="text" name="fullName" placeholder="" autocomplete="off" class="form-control">
+                            <input type="text" id="fullName" name="fullName" placeholder="" autocomplete="off" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>E-mail</label>
-                            <input type="email" name="email" placeholder="" autocomplete="off" class="form-control">
+                            <input type="email" id="email" name="email" placeholder="" autocomplete="off" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>Contact</label>
-                            <input type="text" name="contact" placeholder="03328831270"  autocomplete="off" class="form-control">
+                            <input type="text" id="contact" name="contact" placeholder="03328831270"  autocomplete="off" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>Password</label>
-                            <input type="password" id="password" name="password" placeholder="" class="form-control">
+                            <input type="password" id="password" id="password" name="password" placeholder="" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>Re-Enter Password</label>
@@ -99,9 +99,9 @@
                         <div class="form-group">
                             <label>Gender</label>
                             <div class="form-control">
-                                <input type="radio" name="gender" value="male">
+                                <input type="radio" id="genderM" name="gender" value="male">
                                 <span class="mr-3">Male</span>
-                                <input type="radio" name="gender" value="female">
+                                <input type="radio" id="genderF" name="gender" value="female">
                                 <span>Female</span>
                             </div>
                         </div>
@@ -110,7 +110,7 @@
 
                         <div class="row">
                             <div class="col-md-4">
-                                <select name="date" class="form-control">
+                                <select id="date" name="date" class="form-control">
                                     <option value="">Date</option>
                                     <option value="1">01</option>
                                     <option value="2">02</option>
@@ -146,7 +146,7 @@
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <select  name="month" class="form-control">
+                                <select id="month"  name="month" class="form-control">
                                     <option value="">Month</option>
                                     <option value="jan">January</option>
                                     <option value="feb">February</option>
@@ -163,7 +163,7 @@
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <select name="year" class="form-control">
+                                <select id="year" name="year" class="form-control">
                                     <option value="">Year</option>
                                     <option value="1982">1982</option>
                                     <option value="1983">1983</option>
@@ -206,9 +206,12 @@
                         </div>
                         
                         <div class="wthree-text"> 
-                            <input type="submit" name="submit" value="Submit" class="btn btn-index btn-block btn-primary mt-4 mb-2">
+                            <input type="submit" id="signup" name="submit" value="Submit" class="btn btn-index btn-block btn-primary mt-4 mb-2">
                         </div>
                     </form>
+                </div>
+                <div class="modal-footer message" id="signupMessageBox">
+                    <label id="signupRES"></label>
                 </div>
             </div>
         </div>
