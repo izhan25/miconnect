@@ -54,4 +54,17 @@ footer{
     color: white;
 }
 
+/*profile page styles*/
 
+.user-image{
+    border-radius: 100px;
+    padding: 20;
+}
+.user-image:hover{
+    opacity: 0.8;
+    transition: 0.2s;
+}
+.user-table{
+    line-height: 30px;
+    margin-top: 15px;
+}

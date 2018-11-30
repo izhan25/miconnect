@@ -156,5 +156,6 @@ class UserController extends Database{
 
     return false;
   }
+
 }
 

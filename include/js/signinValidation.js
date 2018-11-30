@@ -54,6 +54,7 @@ $(function() {
                 if(response.message == 'Signed In'){
                     $('#signinMessageBox').removeClass("error-validation");
                     $('#signinMessageBox').addClass("success-validation");
+                    window.location = response.url;
                 }
             },
             error: function(e){

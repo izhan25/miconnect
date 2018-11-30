@@ -2,6 +2,7 @@
 include '../../config/Database.php';
 include '../../models/User.php';
 include '../../controllers/UserController.php';
+include '../middleware/app.php';
 
 if( isset($_POST['userName']) && !empty($_POST['userName']) ) {
     if( isset($_POST['password']) && !empty($_POST['password']) ){
@@ -23,17 +24,21 @@ if( isset($_POST['userName']) && !empty($_POST['userName']) ) {
         // Get row count
         $num = $result->rowCount();
 
+        
         // check if any user found
         if($num > 0){
             // signin success
             $message = 'Signed In';
+
+            // assigning session array
+            $_SESSION['user'] = $result->fetch(PDO::FETCH_ASSOC);
         }
         else{
             // signin failed
             $message = 'User Not Found';
         }
 
-        echo json_encode( array("message"=>$message) );
+        echo json_encode( array("message"=>$message, "url"=> $home) );
     }
     
 }

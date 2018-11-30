@@ -9,8 +9,8 @@
     <!--Bootstrap-->
     <link rel="stylesheet" href="include/bootstrap/bootstrap-litera.css">
     
-    <!--Index Content Style-->
-    <link rel="stylesheet" href="include/css/index_contentStyle.css">
+    <!-- My Style-->
+    <link rel="stylesheet" href="include/css/myStyle.css">
 </head>
 <body>
 
@@ -24,8 +24,8 @@
         <div class="logo">M</div>
     </div>
     <div class="d-flex justify-content-center" style="margin-top: 20px;">
-        <a href="/views/signup.php" class="btn btn-outline-primary btn-lg btn-index" data-toggle="modal" data-target="#signupForm">Signup</a>
-        <a href="/views/signup.php" class="btn btn-outline-primary btn-lg btn-index" style="margin-left: 20px;" data-toggle="modal" data-target="#signinForm">Signin</a>
+        <a href="#" class="btn btn-outline-primary btn-lg btn-index" data-toggle="modal" data-target="#signupForm">Signup</a>
+        <a href="#" class="btn btn-outline-primary btn-lg btn-index" style="margin-left: 20px;" data-toggle="modal" data-target="#signinForm">Signin</a>
     </div>
 
     <!-- Modal Sign In-->
@@ -221,6 +221,17 @@
     <?php
         include 'views/components/_footer.php';
     ?>
+
+
+
+
+
+
+    <!--
+        Scripts
+    -->
+
+
 
     <!--Jquery and BootstrapJs-->
     <script src="include/js/jquery.js"> </script>
