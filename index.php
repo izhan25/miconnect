@@ -1,3 +1,13 @@
+<?php
+
+    include './actions/middleware/app.php';
+
+    if(isset($_SESSION['user'])){
+        header('location: '. $home);
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

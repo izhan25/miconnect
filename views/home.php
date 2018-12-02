@@ -12,7 +12,15 @@
     <title>MiConnect</title>
 
     <!--Bootstrap-->
-    <link rel="stylesheet" href="../include/bootstrap/bootstrap-litera.css"></head>
+    <link rel="stylesheet" href="../include/bootstrap/bootstrap-litera.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- My Style-->
+    <link rel="stylesheet" href="../include/css/myStyle.css">
+
+</head>
 <body>
 
     <!-- Navbar -->   
@@ -22,11 +30,9 @@
 
 
     <!-- Content -->   
-    <h2>Home Page Works</h2>
-
-
-
-
+    <div class="container">
+        <?php include './components/_home.php' ?>
+    </div>
 
     <!--
         Scripts
@@ -36,5 +42,7 @@
     <script src="../include/js/jquery.js"> </script>
     <script src="../include/bootstrap/js/bootstrap.min.js"> </script>
     
+    <!-- Home Js -->
+    <script src="../include/js/home.js"></script>
 </body>
 </html>

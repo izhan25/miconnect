@@ -68,3 +68,22 @@ footer{
     line-height: 30px;
     margin-top: 15px;
 }
+
+/* Home Page Styles */
+
+.list-icons{
+    font-size: 30px;
+}
+.selected{
+    color: #4582EC;
+    cursor: pointer; 
+}
+.side-nav-option:hover{
+    color: #4582EC;
+    cursor: pointer; 
+}
+
+.user-post-image{
+    width: 60px;
+    height: 60px;
+}
