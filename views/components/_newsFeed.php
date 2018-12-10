@@ -20,7 +20,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-xs-3">
-                            <img src="../include/images/default_User.png" class="img-fluid img-thumbnail user-post-image">
+                            <img src="./include/images/default_User.png" class="img-fluid img-thumbnail user-post-image">
                         </div>
                         <div class="col-xs-7">
                             <label class="text-capitalize font-weight-bold ml-2 p-2 mt-2"><?php echo $_SESSION['user']['full_name'] ?></label>
@@ -39,7 +39,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-xs-3">
-                            <img src="../include/images/default_User.png" class="img-fluid img-thumbnail user-post-image">
+                            <img src="./include/images/default_User.png" class="img-fluid img-thumbnail user-post-image">
                         </div>
                         <div class="col-xs-7">
                             <label class="text-capitalize font-weight-bold ml-2 p-2 mt-2"><?php echo $_SESSION['user']['full_name'] ?></label>

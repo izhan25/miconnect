@@ -10,7 +10,7 @@ session_start();
 $root = 'http://localhost/MiConnect/';
 
 // home
-$home = $root . 'views/home.php';
+$home = $root . 'home.php';
 
 // auth
 $auth = $root . 'actions/middleware/authenticate.php';

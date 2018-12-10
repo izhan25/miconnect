@@ -4,6 +4,7 @@ include '../../models/User.php';
 include '../../controllers/UserController.php';
 include '../middleware/app.php';
 
+
 if( isset($_POST['userName']) && !empty($_POST['userName']) ) {
     if( isset($_POST['password']) && !empty($_POST['password']) ){
         $name = $_POST['userName'];
