@@ -1,6 +1,6 @@
 <!--Mobile Navbar-->
-<div class=" d-block d-xs-block d-sm-block d-md-none d-lg-none">
-    <div class="d-flex flex-row list-icons justify-content-center">
+<div class=" d-block d-xs-block d-sm-block d-md-none d-lg-none fixed-bottom">
+    <div class="d-flex flex-row list-icons justify-content-center mob-nav">
         <div class="p-2 ml-3">
             <span><i class="fa fa-newspaper-o feedBtn" aria-hidden="true"></i></span>
         </div>
