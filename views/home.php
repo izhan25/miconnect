@@ -1,6 +1,11 @@
 <?php
     include '../actions/middleware/app.php';
     include '../actions/middleware/authenticate.php';
+
+    include '../config/Database.php';
+    include '../models/Post.php';
+    include '../controllers/PostController.php';
+    include '../controllers/UserController.php';
 ?>
 
 <!DOCTYPE html>
