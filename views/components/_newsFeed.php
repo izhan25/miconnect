@@ -1,26 +1,3 @@
-<?php
-   $user = new UserController();
-   $post = new PostController();
-
-   $posts = $post->getPosts();
-   $users = $user->getUsers();
-   $friends = $user->getFriends($_SESSION['user']['id']);
-
-   $filteredPosts = array();
-
-    if($friends != 'No Friends Found'){
-        foreach($posts as $post){
-            foreach($friends as $friend){
-                 if($post['user_id'] == $friend['friend_id']){
-                     array_push($filteredPosts, $post);
-                 }
-            }
-        }
-    }
-   
-
-?>
-
 <div id="newsFeed">
     <!-- Create New Post -->
     <div class="row">

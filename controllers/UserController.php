@@ -18,6 +18,22 @@ class UserController extends Database{
     }
   }
 
+  public function getUser($user_id){
+
+    $query = "select * from users where user_id = ". $user_id ;
+    $result = $this->connect()->query($query);
+    $num = $result->rowCount();
+    if($num > 0 ){
+      while($row = $result->fetch(PDO::FETCH_ASSOC)){
+        $data[] = $row;
+      }
+      return $data;
+    } 
+    else{
+      return 'No User Found';
+    }
+  }
+
   public function validateEmail($email){
 
     // query
@@ -169,6 +185,46 @@ class UserController extends Database{
     } 
     else{
       return 'No Friends Found';
+    }
+  }
+
+  public function sendRequest($id, $sender){
+
+      $query = 'insert into requests 
+                set 
+                user_id = :sender, 
+                req_id = :userid';
+
+      // preparing statement
+      $stmt = $this->connect()->prepare($query);
+
+      // binding parameters
+      $stmt->bindParam(':userid', $id);
+      $stmt->bindParam(':sender', $sender);
+
+      // Execute query
+      if($stmt->execute()) {
+        $message = 'sent';
+        return $message;
+      }
+
+      // Print error if something goes wrong
+      $message = "Error: %s.\n". $stmt->error;
+      return $message;
+  }
+
+  public function getRequests($id){
+    $query = 'select * from requests where user_id = '. $id;
+    $result = $this->connect()->query($query);
+    $num = $result->rowCount();
+    if($num > 0 ){
+      while($row = $result->fetch(PDO::FETCH_ASSOC)){
+        $data[] = $row;
+      }
+      return $data;
+    } 
+    else{
+      return 'No Requests Found';
     }
   }
 
