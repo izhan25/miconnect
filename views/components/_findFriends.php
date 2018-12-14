@@ -20,7 +20,7 @@
     <!-- Searched Content -->
     <div class="row mt-4">
         <div class="col-md-12">
-        <?php foreach($notFriends as $user): ?>
+        <?php foreach($users as $user): ?>
             <div class="card">
                 <div class="card-body">
                     <div class="row">
@@ -55,7 +55,7 @@
     function sendRequest(name){
         $.ajax({
             type: "GET",
-            url: "/MiConnect/actions/user/sendRequestAction.php",
+            url: "<?php echo $root ?>actions/user/sendRequestAction.php",
             data: {
                 user_id : name
             },

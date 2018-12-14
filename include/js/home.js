@@ -20,6 +20,8 @@ $('.RequestBtn').click(requestFunc);
 $('.ProflileBtn').click(profileFunc);
 $('.AlbumBtn').click(albumFunc);
 
+
+
 // functions
 function feedFunc(){
     newsFeed.show();

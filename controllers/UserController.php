@@ -228,5 +228,34 @@ class UserController extends Database{
     }
   }
 
+  public function changePassword($newPassword, $id){
+
+    $query = 'update users
+              set 
+                password = :newPassword
+              where 
+                id = :id';
+
+    // preparing statement
+    $stmt = $this->connect()->prepare($query);
+
+    // encrypting password
+    $pwd_enc = md5($newPassword);
+
+    // binding parameters
+    $stmt->bindParam(':newPassword', $pwd_enc);
+    $stmt->bindParam(':id', $id);
+
+    // Execute query
+    if($stmt->execute()) {
+      $message = 'Password Changed';
+      return $message;
+    }
+
+    // Print error if something goes wrong
+    $message = "Error: %s.\n". $stmt->error;
+    return $message;
+  }
+
 }
 

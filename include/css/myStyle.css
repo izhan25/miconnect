@@ -57,6 +57,7 @@ footer{
 /*profile page styles*/
 
 .user-image{
+    cursor: zoom-in;
     border-radius: 100px;
     padding: 20;
 }
@@ -90,4 +91,11 @@ footer{
 
 .mob-nav{
     background-color: whitesmoke;
+}
+
+.img-profile{
+    width: 40%;
+    border-radius: 50%;
+    border: 5px solid rgb(170, 170, 170);
+    margin: 0px auto;
 }

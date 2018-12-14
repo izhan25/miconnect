@@ -63,6 +63,14 @@
     <script src="../include/js/jquery.js"> </script>
     <script src="../include/bootstrap/js/bootstrap.min.js"> </script>
 
+    <!--Jquery Validation -->
+    <script src="https://cdn.jsdelivr.net/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+
+    <!-- Jquery Alert Boxes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+
 </head>
 <body>
 
