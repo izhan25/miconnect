@@ -7,9 +7,9 @@
   <?php if(!empty($_SESSION['user'])): ?>
     <div class="d-none d-sm-block">
       <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="http://localhost/MiConnect/views/home.php">Home</a>
-        <a class="p-2 text-dark" href="http://localhost/MiConnect/views/profile.php">Profile</a>
-        <a class="btn btn-danger btn-sm" href="http://localhost/MiConnect/actions/user/logout.php">Logout</a>
+        <a class="p-2 text-dark" href="<?php echo $root ?>views/home.php">Home</a>
+        <a class="p-2 text-dark" href="<?php echo $root ?>views/profile.php">Profile</a>
+        <a class="btn btn-danger btn-sm" href="#" onclick="logout()">Logout</a>
       </nav>
     </div>
   <?php endif ?>

@@ -1,20 +1,23 @@
 <!--Mobile Navbar-->
 <div class=" d-block d-xs-block d-sm-block d-md-none d-lg-none fixed-bottom">
     <div class="d-flex flex-row list-icons justify-content-center mob-nav">
-        <div class="p-2 ml-3 option-feed selected">
-            <span><i class="fa fa-newspaper-o feedBtn" aria-hidden="true"></i></span>
-        </div>
         <div class="p-2 ml-3 option-friends">
             <span><i class="fa fa-search friendsBtn" aria-hidden="true" ></i></span>
         </div>
         <div class="p-2 ml-3 option-request">
             <span><i class="fa fa-users RequestBtn" aria-hidden="true" ></i></span>
         </div>
+        <div class="p-2 ml-3 option-feed selected">
+            <span><i class="fa fa-newspaper-o feedBtn" aria-hidden="true"></i></span>
+        </div>
         <div class="p-2 ml-3 option-profile">
             <span><i class="fa fa-user ProflileBtn" aria-hidden="true" ></i></span>
         </div>
         <div class="p-2 ml-3 option-album">
             <span><i class="fa fa-picture-o AlbumBtn" aria-hidden="true" ></i></span>
+        </div>
+        <div class="p-2 ml-3">
+            <span><i class="fa fa-power-off" aria-hidden="true" onclick="logout()"></i></span>
         </div>
     </div>
 </div>

@@ -116,3 +116,20 @@ function acceptRequest(id){
         }
     });
 }
+
+// Log out 
+function logout(){
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are You Sure You Want To Log Out',
+        buttons: {
+            confirm: function () {
+                window.location = root + 'actions/user/logout.php';
+            },
+            cancel: function () {
+                // do nothing
+            }
+        }
+    });
+    
+}

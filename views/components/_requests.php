@@ -25,7 +25,12 @@
     </div>
 
         <?php if($requests == 'No Requests Found'): ?>
-            <h4><?php echo $requests ?></h4>
+            <div class="text-center mt-4" style="color: gray;">
+                <h4><?php echo $requests ?></h4>
+                <br>
+                <i class="fa fa-rocket fa-5x" aria-hidden="true"></i>
+            </div>
+            
         <?php endif ?>
 
         <?php if($requests != 'No Requests Found'): ?>
