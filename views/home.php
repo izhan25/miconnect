@@ -20,6 +20,9 @@
     <!-- My Style-->
     <link rel="stylesheet" href="../include/css/myStyle.css">
 
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+
     <!--Jquery and BootstrapJs-->
     <script src="../include/js/jquery.js"> </script>
     <script src="../include/bootstrap/js/bootstrap.min.js"> </script>

@@ -34,6 +34,21 @@ class UserController extends Database{
     }
   }
 
+  public function getUserByName($user_Name){
+    $query = "select * from users where user_name = '". $user_Name ."'";
+    $result = $this->connect()->query($query);
+    $num = $result->rowCount();
+    if($num > 0 ){
+      while($row = $result->fetch(PDO::FETCH_ASSOC)){
+        $data[] = $row;
+      }
+      return $data;
+    } 
+    else{
+      return 'No User Found';
+    }
+  }
+
   public function validateEmail($email){
 
     // query
@@ -213,8 +228,53 @@ class UserController extends Database{
       return $message;
   }
 
+  public function acceptRequest($acceptor, $sender){
+
+    // Inserting in the Friends Table
+    $query = 'insert into friends 
+              set 
+              user_id = :acceptor, 
+              friend_id = :sender';
+
+    $stmt = $this->connect()->prepare($query);
+
+    $stmt->bindParam(':acceptor', $acceptor);
+    $stmt->bindParam(':sender', $sender);
+
+    if($stmt->execute()) {
+      $accepted = true;
+    }
+    else{
+      $accepted = false;
+    }
+
+    // Deleting The request From Request Table
+    $queryReq = 'delete from requests 
+                 where
+                 user_id = :userId';
+
+    $stmtReq = $this->connect()->prepare($queryReq);
+
+    $stmtReq->bindParam(':userId', $sender);
+
+    if($stmtReq->execute()){
+      $reqDeleted = true;
+    }
+    else{
+      $reqDeleted = false;
+    }
+
+    if($accepted && $reqDeleted){
+      return 'accpeted';
+    }
+    else{
+      return 'some error occurred';
+    }
+
+  }
+
   public function getRequests($id){
-    $query = 'select * from requests where user_id = '. $id;
+    $query = 'select * from requests where req_id = '. $id;
     $result = $this->connect()->query($query);
     $num = $result->rowCount();
     if($num > 0 ){

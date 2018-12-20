@@ -71,7 +71,11 @@
                                         <img src="../include/images/users/<?php echo $user['image'] ?>" class="img-fluid img-thumbnail user-post-image">
                                     </div>
                                     <div class="col-xs-7">
-                                        <label class="text-capitalize font-weight-bold ml-2 p-2 mt-2"><?php echo $user['full_name'] ?></label>
+                                        <label class="text-capitalize font-weight-bold ml-2 p-2 mt-2 name-feed" 
+                                               onclick="displayProfile('<?php echo $user['user_name'] ?>')"
+                                        >
+                                            <?php echo $user['full_name'] ?>
+                                        </label>
                                     </div>
                                 <?php endif ?>
                             <?php endforeach ?>

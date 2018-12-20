@@ -99,3 +99,10 @@ footer{
     border: 5px solid rgb(170, 170, 170);
     margin: 0px auto;
 }
+
+.name-feed{
+    cursor: pointer;
+}
+.name-feed:hover{
+    color: #4582EC
+}

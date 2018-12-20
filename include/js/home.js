@@ -84,3 +84,35 @@ function sendRequest(name){
         }
     });
 }
+
+// Back to home [ will be clicked from profiles page ]
+function backToHome(){
+    window.location = root;
+}
+
+// Displaying Profile [will be clicked from news feed page]
+function displayProfile(name){
+    window.location = root + 'views/profiles.php?user=' + name;
+}
+
+
+// Accept Request
+function acceptRequest(id){
+    $.ajax({
+        type: "GET",
+        url:  root + "actions/user/acceptRequestAction.php",
+        data: {
+            user_id : id
+        },
+        dataType:'JSON', 
+        success: function(response){
+            var btn = $('#'+response.requested);
+            btn.html(response.message);
+            btn.removeClass('btn-primary');
+            btn.addClass('btn-default');
+        },
+        error: function(e){
+            console.log(e.responseText);
+        }
+    });
+}
