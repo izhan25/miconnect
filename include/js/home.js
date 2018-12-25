@@ -6,9 +6,8 @@ $(function(){
     $('#view').load( root + 'views/components/_newsFeed.php');
 });
 
-
-// Event Listeners for Views
-$('.feedBtn').click(function(){
+// this function will load news feed view
+function loadFeed(){
     $('#view').load( root + 'views/components/_newsFeed.php');
 
     // managing selected css class
@@ -17,7 +16,10 @@ $('.feedBtn').click(function(){
     $('.option-request').removeClass('selected');
     $('.option-profile').removeClass('selected');
     $('.option-album').removeClass('selected');
-});
+}
+
+// Event Listeners for Views
+$('.feedBtn').click(loadFeed);
 
 $('.friendsBtn').click(function(){
     $('#view').load( root + 'views/components/_findFriends.php');
@@ -313,3 +315,99 @@ $("form[name='login']").validate({
     }
 });
 
+
+// load file event [will be fired from news feed's create post section]
+function loadFile(){
+
+    const realFileBtn = document.querySelector('#postImage');
+    const customText = document.querySelector('#customText');
+
+    realFileBtn.click();
+
+    realFileBtn.addEventListener('change', function(){
+        if(realFileBtn.value){
+
+            $('#fileSelectedDisplay').show();
+
+            var file = parsePath(realFileBtn.value);
+
+            customText.innerHTML = file.name;
+            var validImage = validateImage(file.extension);
+            if(!validImage){
+                $.alert('Please Select A File of <br> .jpg  .png  .jpeg  .gif ');
+                discardFile();
+            }
+        }else{
+
+            $('#fileSelectedDisplay').hide();
+
+            customText.innerHTML = '';
+        }
+    });
+
+}
+
+// this function will check that the input file is image or not
+function validateImage(extension){
+   switch(extension){
+       case '.jpg':
+            return true;
+            break;
+        case '.png':
+            return true;
+            break;
+        case '.jpeg':
+            return true;
+            break;
+        case '.gif':
+            return true;
+            break;
+        default:
+            return false;
+            break;
+   }
+}
+
+// This Function will extract the file name, path and extenxion from the path
+function parsePath (path) {
+    var parts = (/(\w?\:?\\?[\w\-_ \\]*\\+)?([\w-_ ]+)?(\.[\w-_ ]+)?/gi).exec(path);
+    return {
+        path: parts[0] || "",
+        folder: parts[1] || "",
+        name: parts[2] || "",
+        extension: parts[3] || "",
+    };
+}
+
+// discard file event [will be fired from news feed's create post section]
+function discardFile(){
+    const realFileBtn = document.querySelector('#postImage');
+    const customText = document.querySelector('#customText');
+
+    realFileBtn.value = '';
+    customText.innerHTML = realFileBtn.value;
+
+    $('#fileSelectedDisplay').hide();
+}
+
+// this function will disable the create new post submit button if the post body is empty
+function enableSubmitBtn(){
+    if($('#body').val() == ''){
+        document.querySelector('#postSubmitBtn').disabled = true;
+    }
+    else{
+        document.querySelector('#postSubmitBtn').disabled = false;
+    }
+}
+
+// this function will post the body and image of the post
+function submitPost(){
+    const image = document.querySelector('#postImage');
+    const body = document.querySelector('#body');
+    const imageName = document.querySelector('#customText');
+
+    if(body.value == ''){
+        $.alert("Couldn't upload an empty post body");
+    }
+    
+}

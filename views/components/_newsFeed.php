@@ -47,10 +47,20 @@
         <div class="col-md-12">
             <form>
                 <div class="form-group">
-                    <textarea name="body" id="body" cols="30" rows="5" class="form-control" placeholder="Create a new post to share with your friends"></textarea>
+                    <textarea name="body" id="body" cols="30" rows="5" class="form-control" placeholder="Create a new post to share with your friends" onkeyup="enableSubmitBtn()"></textarea>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Create Post" class="btn btn-primary float-right">
+                    <input type="file" name="postImage" id="postImage" hidden="hidden">
+                </div>
+                <div class="form-group">
+                    <i class="fa fa-picture-o fa-2x float-left font-icon" style="cursor:pointer;" onclick="loadFile()"></i>
+
+                    <span id="fileSelectedDisplay" onload="fileSelected()">
+                        <label class="ml-1 mt-1" id="customText">No File</label>
+                        <label class="ml-1 mt-1 font-icon" style="cursor:pointer;" onclick="discardFile()">&times;</label>
+                    </span>
+                    
+                    <input type="button" id="postSubmitBtn" value="Create Post" class="btn btn-primary float-right" onclick="submitPost()">
                 </div>
             </form>
         </div>
@@ -94,3 +104,8 @@
         </div>
     </div>
 </div>
+
+<script>
+    $('#fileSelectedDisplay').hide();
+    document.querySelector('#postSubmitBtn').disabled = true;
+</script>
