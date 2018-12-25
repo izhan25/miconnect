@@ -337,11 +337,17 @@ function loadFile(){
                 $.alert('Please Select A File of <br> .jpg  .png  .jpeg  .gif ');
                 discardFile();
             }
+
+            // enabling submit button
+            document.querySelector('#postSubmitBtn').disabled = false;
         }else{
 
             $('#fileSelectedDisplay').hide();
 
             customText.innerHTML = '';
+
+            // disabling submit button
+            document.querySelector('#postSubmitBtn').disabled = true;
         }
     });
 
@@ -388,6 +394,9 @@ function discardFile(){
     customText.innerHTML = realFileBtn.value;
 
     $('#fileSelectedDisplay').hide();
+
+    // disabling submit button
+    document.querySelector('#postSubmitBtn').disabled = true;
 }
 
 // this function will disable the create new post submit button if the post body is empty
@@ -406,8 +415,21 @@ function submitPost(){
     const body = document.querySelector('#body');
     const imageName = document.querySelector('#customText');
 
-    if(body.value == ''){
-        $.alert("Couldn't upload an empty post body");
-    }
+    var formData = new FormData();
+    formData.append('body', body.value);
+    formData.append('file', $('#postImage')[0].files[0]);
+    formData.append('submit', 'submit');
+
+    $.ajax({
+        url : root + 'actions/posts/createPostAction.php',
+        type : 'POST',
+        data : formData,
+        processData: false,  // tell jQuery not to process the data
+        contentType: false,  // tell jQuery not to set contentType
+        success : function(data) {
+            $.alert(data);
+        }
+    });
+
     
 }

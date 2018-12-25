@@ -45,7 +45,7 @@
     <!-- Create New Post -->
     <div class="row">
         <div class="col-md-12">
-            <form>
+            <form id="createPostForm">
                 <div class="form-group">
                     <textarea name="body" id="body" cols="30" rows="5" class="form-control" placeholder="Create a new post to share with your friends" onkeyup="enableSubmitBtn()"></textarea>
                 </div>
