@@ -112,10 +112,11 @@
                         <div class="form-group">
                             <label>Gender</label>
                             <div class="form-control">
-                                <input type="radio" id="genderM" name="gender" value="male">
+                                <input type="radio" id="genderM" name="gender" value="male" onchange="getGender('male')">
                                 <span class="mr-3">Male</span>
-                                <input type="radio" id="genderF" name="gender" value="female">
+                                <input type="radio" id="genderF" name="gender" value="female" onchange="getGender('female')">
                                 <span>Female</span>
+                                <input type="text" id="genderInput" value="" name="genderInput" disabled="disabled" hidden="hidden">
                             </div>
                         </div>
                                     
@@ -254,11 +255,8 @@
     <script src="https://cdn.jsdelivr.net/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
 
-    <!--Sign up Validation-->
-    <script src="include/js/signupValidation.js"></script>
-
-    <!-- Sign In Validation -->
-    <script src="include/js/signinValidation.js"></script>
+    <!-- Home JS -->
+    <script src="include/js/home.js"></script>
     
 </body>
 </html>

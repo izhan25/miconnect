@@ -130,74 +130,73 @@
 </div>
 
 
-
 <script>
-    $("form[name='changePassword']").validate({
-        rules: {
-            currentPassword: {
-                required: true,
-                minlength: 5
-            },
-            newPassword: {
-                required: true,
-                minlength: 5
-            },
-            confirmNewPassword:{
-                equalTo: "#newPassword"
-            }
-            
+$("form[name='changePassword']").validate({
+    rules: {
+        currentPassword: {
+            required: true,
+            minlength: 5
         },
-        messages: {
-            currentPassword: {
-                required: "Required",
-                minlength: "Password must conatin more than 5 chars",
-            },
-            newPassword: {
-                required: "Required",
-                minlength: "Password must conatin more than 5 chars",
-            },
-            confirmNewPassword: {
-                equalTo: "Password doesn't match to New Password"
-            },
+        newPassword: {
+            required: true,
+            minlength: 5
         },
-    
-        submitHandler: function(form) {
-            
-            $.ajax({
-                type: "POST",
-                url: "<?php echo $root ?>actions/user/changePasswordAction.php",
-                data: {
-                    currentPassword : $('#currentPassword').val(),
-                    newPassword : $('#newPassword').val()
-                },
-                dataType:'JSON', 
-                success: function(response){
-                    $('#changePasswordRES').html(response.message);
-                    if(!response.success){
-                        $('#changePassowrdMessageBox').removeClass("success-validation");
-                        $('#changePassowrdMessageBox').addClass("error-validation");
-                    }
-                    if(response.success){
-                        $('#changePassowrdMessageBox').removeClass("error-validation");
-                        $('#changePassowrdMessageBox').addClass("success-validation");
-
-                        $.confirm({
-                            title: 'Please Log In!',
-                            content: 'Your Password Have Been Changed Kindly Login Again To Continue',
-                            buttons: {
-                                confirm: function () {
-                                    window.location = response.url;
-                                },
-                            }
-                        });
-                    }
-                },
-                error: function(e){
-                    $('#changePasswordRES').html(e.responseText);
-                }
-            });
-            
-            //form.submit();
+        confirmNewPassword:{
+            equalTo: "#newPassword"
         }
-    });
+        
+    },
+    messages: {
+        currentPassword: {
+            required: "Required",
+            minlength: "Password must conatin more than 5 chars",
+        },
+        newPassword: {
+            required: "Required",
+            minlength: "Password must conatin more than 5 chars",
+        },
+        confirmNewPassword: {
+            equalTo: "Password doesn't match to New Password"
+        },
+    },
+
+    submitHandler: function(form) {
+        
+        $.ajax({
+            type: "POST",
+            url: "<?php echo $root ?>actions/user/changePasswordAction.php",
+            data: {
+                currentPassword : $('#currentPassword').val(),
+                newPassword : $('#newPassword').val()
+            },
+            dataType:'JSON', 
+            success: function(response){
+                $('#changePasswordRES').html(response.message);
+                if(!response.success){
+                    $('#changePassowrdMessageBox').removeClass("success-validation");
+                    $('#changePassowrdMessageBox').addClass("error-validation");
+                }
+                if(response.success){
+                    $('#changePassowrdMessageBox').removeClass("error-validation");
+                    $('#changePassowrdMessageBox').addClass("success-validation");
+
+                    $.confirm({
+                        title: 'Please Log In!',
+                        content: 'Your Password Have Been Changed Kindly Login Again To Continue',
+                        buttons: {
+                            confirm: function () {
+                                window.location = response.url;
+                            },
+                        }
+                    });
+                }
+            },
+            error: function(e){
+                $('#changePasswordRES').html(e.responseText);
+            }
+        });
+        
+        //form.submit();
+    }
+});
 </script>

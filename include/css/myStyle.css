@@ -106,3 +106,17 @@ footer{
 .name-feed:hover{
     color: #4582EC
 }
+
+.img-test{
+    display: inline;
+    width: 10%;
+}
+
+.img-album{
+    cursor: pointer;
+}
+
+.img-thumbnail:hover{
+    border: 2px solid #4582EC;
+    transition: .2s;
+}
