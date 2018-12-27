@@ -8,10 +8,10 @@
     include '../../controllers/UserController.php';
 
     $user = new UserController();
-    $post = new PostController();
+    $postAction = new PostController();
 
     // Fetching Tables
-    $posts = $post->getPosts();
+    $posts = $postAction->getPosts();
     $users = $user->getUsers();
     $friends = $user->getFriends($_SESSION['user']['id']);
     $requests = $user->getRequests($_SESSION['user']['id']);
@@ -34,6 +34,8 @@
             }
         }
     }
+
+
 
     // filtering users to sent them request
     $notFriends = array();
@@ -77,6 +79,9 @@
         <div class="col-md-12">
 
             <?php foreach($filteredPosts as $post): ?>
+
+                
+                
                 <div class="card" id="<?php echo $post[id] ?>">
                     <div class="card-header">
                         <div class="row">
@@ -118,21 +123,43 @@
                                         <p class="card-text"><?php echo $post['body'] ?></p>
                                     </div>
                                 </div>
+
+                                <hr>
                                 
                                 <div class="row">
                                     <div class="col-md-12">
+
+                                        <?php
+                                            // Getting Count of likes
+                                            $likesCount = $postAction->get_Likes_Count($post['id']);
+                                        ?>
+
                                         <i class="fa fa-thumbs-o-up font-icon list-icons" 
                                            aria-hidden="true"
                                            onclick="likePost('<?php echo $post['id'] ?>')"
                                            id="likeBtn<?php echo $post['id'] ?>"
                                         ></i>
+                                        <i> 
+                                            <?php 
+                                                if($likesCount['COUNT(user_id)'] > 0){
+                                                    echo  $likesCount['COUNT(user_id)'];
+                                                
+                                                    if($likesCount['COUNT(user_id)'] == 1){
+                                                        echo ' like';
+                                                    }
+                                                    else{
+                                                        echo ' likes';
+                                                    }
+                                                }
+                                            ?> 
+                                        </i>
 
                                         <?php if($_SESSION['user']['id'] == $post['user_id']): ?>
-                                            <i class="fa fa-pencil-square-o ml-3 font-icon list-icons" 
+                                            <i class="fa fa-pencil-square-o ml-3 font-icon list-icons float-right" 
                                                aria-hidden="true" 
                                                
                                             ></i>
-                                            <i class="fa fa-times ml-3 font-icon list-icons" 
+                                            <i class="fa fa-times ml-3 font-icon list-icons float-right" 
                                                aria-hidden="true" 
                                                onclick="deletePost('<?php echo $post['id'] ?>', '<?php echo $post['image'] ?>')"
                                             ></i>

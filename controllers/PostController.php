@@ -193,5 +193,24 @@ class PostController extends Database{
 
     }
 
+    public function get_Likes_Count($postId){
+
+      $query = 'SELECT COUNT(user_id)
+                FROM likes
+                WHERE post_id = :postId';
+
+      // Preparing Statement
+      $stmt = $this->connect()->prepare($query);
+
+      // binding Paramaters
+      $stmt->bindParam(':postId', $postId);
+
+
+      // executing statement
+      $stmt->execute();
+
+      return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
   }
   

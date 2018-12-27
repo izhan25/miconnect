@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2018 at 11:05 PM
+-- Generation Time: Dec 27, 2018 at 08:21 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -40,9 +40,29 @@ CREATE TABLE `friends` (
 --
 
 INSERT INTO `friends` (`id`, `user_id`, `friend_id`, `created_at`) VALUES
-(1, 4, 5, '2018-12-11 20:17:06'),
-(2, 5, 4, '2018-12-11 20:19:19'),
-(3, 5, 1, '2018-12-12 19:45:45');
+(12, 5, 6, '2018-12-26 09:47:16'),
+(13, 6, 5, '2018-12-26 09:47:16');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `likes`
+--
+
+CREATE TABLE `likes` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `likes`
+--
+
+INSERT INTO `likes` (`id`, `user_id`, `post_id`) VALUES
+(32, 5, 7),
+(33, 6, 12),
+(36, 5, 10);
 
 -- --------------------------------------------------------
 
@@ -54,7 +74,7 @@ CREATE TABLE `posts` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `body` text NOT NULL,
-  `image` varchar(255) NOT NULL,
+  `image` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -63,8 +83,12 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `user_id`, `body`, `image`, `created_at`) VALUES
-(1, 4, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ... The first word, “Lorem,” isn\'t even a word; instead it\'s a piece of the word “dolorem,” meaning pain, suffering, or sorrow.', '', '2018-12-11 19:50:13'),
-(2, 8, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ... ', '', '2018-12-11 19:50:36');
+(2, 8, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ... ', '', '2018-12-11 19:50:36'),
+(7, 6, 'jamal post', 'default-post.jpg', '2018-12-25 11:31:03'),
+(8, 7, 'junaid post\n', 'default-post.jpg', '2018-12-25 11:31:27'),
+(9, 8, 'haris post', 'default-post.jpg', '2018-12-25 11:32:04'),
+(10, 5, 'fahim\'s new post', '93to3Zd.jpg', '2018-12-26 09:51:12'),
+(12, 5, '', 'free-pc-wallpapers-desktop-backgrounds-1080p-full-hd-download-high-definiton-wallpapers29-.jpg', '2018-12-27 05:16:12');
 
 -- --------------------------------------------------------
 
@@ -77,17 +101,6 @@ CREATE TABLE `requests` (
   `user_id` int(11) NOT NULL,
   `req_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `requests`
---
-
-INSERT INTO `requests` (`id`, `user_id`, `req_id`) VALUES
-(35, 5, 1),
-(36, 5, 1),
-(37, 5, 4),
-(38, 5, 1),
-(39, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -113,15 +126,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_name`, `full_name`, `email`, `contact`, `password`, `gender`, `birth_date`, `image`, `created_at`) VALUES
-(1, 'jhon', 'jhon cena', 'jhon@email.com', '03328831270', '123456', 'male', '25/apr/1996', 'default_User.png', '2018-11-17 22:33:09'),
-(2, 'jeff', 'jeff hardy', 'jeff@email.com', '03328864512', '123456', '123456', '16/dec/1995', 'default_User.png', '2018-11-17 22:33:09'),
-(4, 'izhan', 'izhan yameen', 'izhan@gmail.com', '03328831270', 'e10adc3949ba59abbe56e057f20f883e', 'male', '25/apr/1996', 'default_User.png', '2018-11-18 20:30:36'),
-(5, 'fahim', 'fahim rana', 'fahim@gmail.com', '03333333333', '4297f44b13955235245b2497399d7a93', 'male', '16/aug/1996', 'default_User.png', '2018-11-21 06:54:58'),
+(5, 'fahim', 'fahim rana', 'fahim@gmail.com', '03333333333', 'e10adc3949ba59abbe56e057f20f883e', 'male', '16/aug/1996', 'default_User.png', '2018-11-21 06:54:58'),
 (6, 'jamal', 'jamal khan', 'jamal@gmail.com', '03328864521', 'e10adc3949ba59abbe56e057f20f883e', 'male', '17/sep/2008', 'default_User.png', '2018-11-21 19:58:51'),
 (7, 'junaid', 'junaid', 'junaid@gmail.com', '03328831270', 'e10adc3949ba59abbe56e057f20f883e', 'male', '15/oct/1997', 'default_User.png', '2018-11-25 20:09:30'),
 (8, 'haris', 'haris', 'haris@gmail.com', '03328831270', 'e10adc3949ba59abbe56e057f20f883e', 'male', '15/sep/1998', 'default_User.png', '2018-11-25 20:19:31'),
 (9, 'izhan25', 'izhan yameen', 'izhan.yameen25@gmail.com', '03328831270', 'e0681c5de47795c2091055c9965e8c46', 'male', '25/apr/1996', 'default_User.png', '2018-12-01 07:30:37'),
-(13, 'jhon1', 'jhon cena', 'jhon1@email.com', '03328831270', 'e10adc3949ba59abbe56e057f20f883e', 'male', '15/jun/1992', 'default_User.png', '2018-12-10 23:47:19');
+(22, 'kashaf', 'kashaf khan', 'kashaf@gmail.com', '03328831270', '4297f44b13955235245b2497399d7a93', 'female', '15/aug/1997', 'default_User.png', '2018-12-25 05:45:48'),
+(24, 'laiba', 'laiba khan', 'laiba@gmail.com', '03328831270', '4297f44b13955235245b2497399d7a93', 'female', '17/oct/1996', 'default_User.png', '2018-12-25 05:52:45'),
+(25, 'javeria', 'javeria kahn', 'javeria@gmail.com', '03328831270', '4297f44b13955235245b2497399d7a93', 'female', '15/sep/1997', 'default_User.png', '2018-12-25 06:13:46');
 
 --
 -- Indexes for dumped tables
@@ -134,6 +146,14 @@ ALTER TABLE `friends`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_id_for_user` (`user_id`),
   ADD KEY `fk_id_for_frnd` (`friend_id`);
+
+--
+-- Indexes for table `likes`
+--
+ALTER TABLE `likes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `post_id` (`post_id`);
 
 --
 -- Indexes for table `posts`
@@ -164,25 +184,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `friends`
 --
 ALTER TABLE `friends`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `likes`
+--
+ALTER TABLE `likes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `requests`
 --
 ALTER TABLE `requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Constraints for dumped tables
@@ -194,6 +220,13 @@ ALTER TABLE `users`
 ALTER TABLE `friends`
   ADD CONSTRAINT `fk_id_for_frnd` FOREIGN KEY (`friend_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_id_for_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `likes`
+--
+ALTER TABLE `likes`
+  ADD CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`);
 
 --
 -- Constraints for table `posts`
