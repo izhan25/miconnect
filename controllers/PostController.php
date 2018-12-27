@@ -4,7 +4,7 @@ class PostController extends Database{
 
     public function getPosts(){
   
-      $query = 'select * from posts';
+      $query = 'select * from posts ORDER BY created_at DESC';
       $result = $this->connect()->query($query);
       $num = $result->rowCount();
       if($num > 0 ){
@@ -16,23 +16,6 @@ class PostController extends Database{
       else{
         return 'No Posts Found';
       }
-    }
-
-    public function getPosts1(){
-      
-      $query = 'SELECT
-                    posts.body,
-                    posts.image,
-                    posts.created_at,
-                    friends.friend_id,
-                    users.id,
-                    users.user_name
-                FROM posts
-                INNER JOIN friends ON friends.user_id = posts.user_id
-                INNER JOIN users ON users.id = posts.user_id
-                WHERE users.id = 5 AND friends.user_id = 5';
-                
-
     }
 
     public function createPost($body, $image , $userId){
@@ -211,6 +194,8 @@ class PostController extends Database{
 
       return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+
 
   }
   

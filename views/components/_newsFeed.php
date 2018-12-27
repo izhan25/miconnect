@@ -82,7 +82,7 @@
 
                 
                 
-                <div class="card" id="<?php echo $post[id] ?>">
+                <div class="card" id="post<?php echo $post['id'] ?>">
                     <div class="card-header">
                         <div class="row">
                             <?php foreach($users as $user): ?>
@@ -110,6 +110,8 @@
                                 <div class="col-md-12">
                                     <img src="<?php echo $root ?>include/images/posts/<?php echo $post['image'] ?>" 
                                         class="img-fluid mx-auto d-block"
+                                        id="postImage<?php echo $post['id'] ?>"
+                                        style="max-height: 500px;"
                                     >
                                 </div>
                             </div>
@@ -120,7 +122,11 @@
 
                                 <div class="row mt-2 mb-2">
                                     <div class="col-md-12">
-                                        <p class="card-text"><?php echo $post['body'] ?></p>
+                                        <?php
+                                            echo '<p class="card-text"
+                                                     id="postBody'.$post['id'].'"
+                                                  >'.$post['body'].'</p>';
+                                        ?>
                                     </div>
                                 </div>
 
@@ -139,7 +145,7 @@
                                            onclick="likePost('<?php echo $post['id'] ?>')"
                                            id="likeBtn<?php echo $post['id'] ?>"
                                         ></i>
-                                        <i> 
+                                        <i id="likesDisplay<?php echo $post['id'] ?>"> 
                                             <?php 
                                                 if($likesCount['COUNT(user_id)'] > 0){
                                                     echo  $likesCount['COUNT(user_id)'];
@@ -156,14 +162,28 @@
 
                                         <?php if($_SESSION['user']['id'] == $post['user_id']): ?>
                                             <i class="fa fa-pencil-square-o ml-3 font-icon list-icons float-right" 
-                                               aria-hidden="true" 
-                                               
+                                               aria-hidden="true"
+                                               data-toggle="modal" data-target="#editPostModal" 
+                                               onclick="editPost('<?php echo $post['id'] ?>')"
                                             ></i>
                                             <i class="fa fa-times ml-3 font-icon list-icons float-right" 
                                                aria-hidden="true" 
                                                onclick="deletePost('<?php echo $post['id'] ?>', '<?php echo $post['image'] ?>')"
                                             ></i>
                                         <?php endif ?>
+
+                                        <?php
+                                            // formatting date of post
+                                            $s = $post['created_at'];
+                                            $dt = new DateTime($s);
+                                            
+                                            $date = $dt->format('d-m-Y');
+                                            $time = $dt->format('H:i');
+                                            
+                                        ?>
+
+                                        <label class="float-right post-date">Posted On <b><?php echo $date, ' | ', $time; ?></b></label>
+
                                     </div>
                                 </div>
                                 
@@ -179,6 +199,60 @@
         </div>
     </div>
 </div>
+
+<!-- Modal Edit Post-->
+<div class="modal fade" id="editPostModal" tabindex="-1" role="dialog" aria-labelledby="editPost" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title text-center" id="editPost">Edit Your Post</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editPostForm">
+                        <div class="form-group">
+                            <textarea name="editBody" id="editBody" cols="30" rows="5" class="form-control" onkeyup="enableEditSubmitBtn()"></textarea>
+                        </div>
+
+                        <div class="row" id="editPostImageRow">
+                            <div class="col-md-12" >
+                                
+                                <img src="" 
+                                     id="editPostImageDisplay" 
+                                     class="img-fluid mx-auto d-block edit-post-image" 
+                                     data-toggle="tooltip" 
+                                     title="Click to change Image"
+                                     alt="post-image" 
+                                     onclick="loadEditFile()"
+                                >
+                                
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="file" name="editPostImage" id="editPostImage" hidden="hidden">
+                        </div>
+                        <div class="form-group">
+
+                            <i class="fa fa-picture-o fa-2x float-left font-icon" style="cursor:pointer;" id="openFileBtn" onclick="loadEditFile()"></i>
+
+                            <span id="editFileSelectedDisplay">
+                                <label class="ml-1 mt-1" id="editCustomText">No File</label>
+                                <label class="ml-1 mt-1 font-icon" style="cursor:pointer;" onclick="discardEditFile()">&times;</label>
+                            </span>
+                            
+                            <input type="button" id="editPostSubmitBtn" value="Update Post" class="btn btn-primary float-right" onclick="submitEditPost()">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer message" id="editPostMessageBox">
+                    <label id="editPostRES"></label>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <script>
     $('#fileSelectedDisplay').hide();

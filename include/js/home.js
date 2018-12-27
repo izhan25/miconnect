@@ -433,6 +433,42 @@ function submitPost(){
     
 }
 
+// This function will get the likes of post, this function will be called from likePost function
+function getLikesCount(id){
+    
+    $.ajax({
+        url: root + 'actions/posts/getLikesCountAction.php',
+        method: 'POST',
+        data : {
+            postId : id,
+            submit : 'submit'
+        },
+        dataType:'JSON', 
+        success: function(response){
+
+            var counter = '';
+
+            if(response.count == 0){
+                $('#likesDisplay' + id).html(counter);
+            }
+            else if(response.count == 1){
+                counter = response.count + ' like';
+                $('#likesDisplay' + id).html(counter);
+            }
+            else{
+                counter = response.count + ' likes';
+                $('#likesDisplay' + id).html(counter);
+            }
+            
+        },
+        error: function(e){
+            console.log(e.responseText);
+        }
+    });
+
+}
+
+// This function is responsible for managing the css class of like button and displaying count of likes for post
 function likePost(id){
     
     $.ajax({
@@ -446,12 +482,15 @@ function likePost(id){
         success: function(response){
             if(response.message){
                 $('#likeBtn'+ id).addClass('font-icon-selected');
+                getLikesCount(id);
             }
             else if(!response.message){
                 $('#likeBtn'+ id).removeClass('font-icon-selected');
+                getLikesCount(id);
             }
             else if(response.message == 'Error in unliking the post'){
                 console.log(response.message);
+                getLikesCount(id);
             }
         },
         error: function(e){
@@ -461,6 +500,7 @@ function likePost(id){
     
 }
 
+// This function will delete a post and remove its image from server
 function deletePost(id, image){
 
     $.confirm({
@@ -491,4 +531,79 @@ function deletePost(id, image){
         }
     });
     
+}
+
+function editPost(id){
+
+    const postBody = $('#postBody'+id).html();
+    const postImage = $('#postImage'+id);
+    
+    $('#editBody').html(postBody);
+
+    var src = $('#postImage'+id).attr('src');
+    if(src){
+        $('#editPostImageDisplay').attr("src", src);
+        $('#editPostImageRow').show();
+        $('#openFileBtn').hide();    
+    }
+    else{
+        $('#editPostImageRow').hide();
+        $('#openFileBtn').show();    
+    }
+    
+    $('#editFileSelectedDisplay').hide();
+
+}
+
+function enableEditSubmitBtn(){
+    document.querySelector('#editPostSubmitBtn').disabled = false;
+}
+
+function loadEditFile(){
+
+    const realFileBtn = document.querySelector('#editPostImage');
+    const customText = document.querySelector('#editCustomText');
+
+    realFileBtn.click();
+
+    realFileBtn.addEventListener('change', function(){
+        if(realFileBtn.value){
+
+            $('#editFileSelectedDisplay').show();
+
+            var file = parsePath(realFileBtn.value);
+
+            customText.innerHTML = file.name;
+            var validImage = validateImage(file.extension);
+            if(!validImage){
+                $.alert('Please Select A File of <br> .jpg  .png  .jpeg  .gif ');
+                discardEditFile();
+            }
+
+            // enabling submit button
+            document.querySelector('#editPostSubmitBtn').disabled = false;
+        }else{
+
+            $('#editFileSelectedDisplay').hide();
+
+            customText.innerHTML = '';
+
+            // disabling submit button
+            document.querySelector('#editPostSubmitBtn').disabled = true;
+        }
+    });
+
+}
+
+function discardEditFile(){
+    const realFileBtn = document.querySelector('#editPostImage');
+    const customText = document.querySelector('#editCustomText');
+
+    realFileBtn.value = '';
+    customText.innerHTML = realFileBtn.value;
+
+    $('#editFileSelectedDisplay').hide();
+
+    // disabling submit button
+    document.querySelector('#editPostSubmitBtn').disabled = true;
 }
