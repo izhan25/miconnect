@@ -230,7 +230,7 @@ class UserController extends Database{
 
   public function acceptRequest($acceptor, $sender){
 
-    // Inserting in the Friends Table
+    // Inserting in the Friends Table For Acceptor
     $query = 'insert into friends 
               set 
               user_id = :acceptor, 
@@ -246,6 +246,24 @@ class UserController extends Database{
     }
     else{
       $accepted = false;
+    }
+
+    // Inserting in the Friends Table For Sender
+    $query1 = 'insert into friends 
+              set 
+              user_id = :sender, 
+              friend_id = :acceptor';
+
+    $stmt1 = $this->connect()->prepare($query);
+
+    $stmt1->bindParam(':acceptor', $sender);
+    $stmt1->bindParam(':sender', $acceptor);
+
+    if($stmt1->execute()) {
+      $accepted1 = true;
+    }
+    else{
+      $accepted1 = false;
     }
 
     // Deleting The request From Request Table
@@ -264,7 +282,7 @@ class UserController extends Database{
       $reqDeleted = false;
     }
 
-    if($accepted && $reqDeleted){
+    if($accepted && $reqDeleted && $accepted1){
       return 'accpeted';
     }
     else{

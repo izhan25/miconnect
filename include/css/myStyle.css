@@ -116,14 +116,11 @@ footer{
     cursor: pointer;
 }
 
-.img-thumbnail:hover{
-    border: 2px solid #4582EC;
-    transition: .2s;
-}
 
 .font-icon:hover{
     color: #4582EC;
 }
 .font-icon-selected{
-    color: #4582EC
+    color: #4582EC;
+    transition: 0.2s;
 }

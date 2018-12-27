@@ -430,6 +430,65 @@ function submitPost(){
             $.alert(data);
         }
     });
+    
+}
 
+function likePost(id){
+    
+    $.ajax({
+        url: root + 'actions/posts/likePostAction.php',
+        method: 'POST',
+        data : {
+            postId : id,
+            submit : 'submit'
+        },
+        dataType:'JSON', 
+        success: function(response){
+            if(response.message){
+                $('#likeBtn'+ id).addClass('font-icon-selected');
+            }
+            else if(!response.message){
+                $('#likeBtn'+ id).removeClass('font-icon-selected');
+            }
+            else if(response.message == 'Error in unliking the post'){
+                console.log(response.message);
+            }
+        },
+        error: function(e){
+            console.log(e.responseText);
+        }
+    });
+    
+}
+
+function deletePost(id, image){
+
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are You Sure You Want To Delete This Post',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url: root + 'actions/posts/deletePostAction.php',
+                    method: 'POST',
+                    data : {
+                        postId : id,
+                        imageName: image,
+                        submit : 'submit'
+                    },
+                    dataType:'JSON', 
+                    success: function(response){
+                        $.alert(response);
+                    },
+                    error: function(e){
+                        $.alert(e.responseText);
+                    }
+                });
+            },
+            cancel: function () {
+                // do nothing
+            }
+        }
+    });
     
 }
