@@ -48,7 +48,7 @@
             
             <form>
                 <div class="form-group">
-                    <input type="text" name="search" class="form-control" placeholder="Enter Any Name Here..." autofocus>
+                    <input type="text" name="search" class="form-control" id="search" placeholder="Enter Any Name Here..." onkeyup="searchFriend()" autofocus>
                 </div>
                 <div class="form-group">
                   <input type="submit"  value="Search" class="btn btn-primary float-right">
@@ -58,36 +58,13 @@
         </div>
     </div>
 
-    <!-- Searched Content -->
-    <div class="row mt-4">
-        <div class="col-md-12">
-        <?php foreach($users as $user): ?>
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <img src="../include/images/users/<?php echo $user['image'] ?>" class="img-fluid img-thumbnail user-post-image ml-3">
-                        </div>
-                        <div class="col-xs-7">
-                            <label class="text-capitalize font-weight-bold ml-2 p-2 mt-2"><?php echo $user['full_name'] ?></label>
-                        </div>
-                    </div>
-                    <div class="row mt-1">
-                        <div class="col-md-12">
-                            <button 
-                                class="btn btn-primary btn-sm float-right text-capitalize" 
-                                id="<?php echo $user['id'] ?>" 
-                                onclick="sendRequest('<?php echo $user['id'] ?>')"
-                            >
-                                Send Request
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr>
-        <?php endforeach ?>
-        </div>
+    <div id="viewFriends">
     </div>
+
+    <script>
+        loadUsers();
+    </script>
+
+    
 
 </div>

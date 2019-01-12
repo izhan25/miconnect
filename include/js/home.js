@@ -533,6 +533,37 @@ function deletePost(id, image){
     
 }
 
+// Search Friends function
+function searchFriend(){
+    const search = $('#search').val();
+
+    if(search == ''){
+        loadUsers();
+        return false;
+    }
+
+    $.ajax({
+        url: root + 'actions/user/searchUserAction.php',
+        method: 'POST',
+        data : {
+            searchItem : search ,
+            submit : 'submit'
+        },
+        dataType:'JSON',
+        success: function(response){
+            $('#viewFriends').html(response.responseText);
+        },
+        error: function(e){
+            $('#viewFriends').html(e.responseText);
+        }
+    });
+}
+
+// load users for find friends page
+function loadUsers(){
+    $('#viewFriends').load( root + 'views/components/_usersList.php');
+}
+
 function editPost(id){
 
     const postBody = $('#postBody'+id).html();
@@ -554,6 +585,7 @@ function editPost(id){
     $('#editFileSelectedDisplay').hide();
 
 }
+
 
 function enableEditSubmitBtn(){
     document.querySelector('#editPostSubmitBtn').disabled = false;

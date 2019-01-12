@@ -335,5 +335,31 @@ class UserController extends Database{
     return $message;
   }
 
+  public function searchUser($user){
+    
+    $query = "SELECT * FROM users WHERE full_name LIKE '%".$user."%' ";
+
+    // preparing statement
+    $stmt = $this->connect()->prepare($query);
+
+    // executing statement
+    if($stmt->execute()){
+
+      $num = $stmt->rowCount();
+      if($num > 0 ){
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+          $data[] = $row;
+        }
+        return $data;
+      } 
+      
+    }
+
+    // Print error if something goes wrong
+    $message = "Error: %s.\n". $stmt->error;
+    return $message;
+
+  }
+
 }
 
