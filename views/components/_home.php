@@ -26,7 +26,16 @@
 <div class="row">
     <!-- Main Content -->
     <div class="col-md-8">
-        <div id="view"></div>
+
+        <div class="text-center loader-container">
+            <span class="loader-inner-container">
+                <div class="loader" id="loader"></div>
+            </span>
+        </div>
+        
+        <div id="view">
+        
+        </div>
     </div>
 
     <!--Desktop Navbar-->

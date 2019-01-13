@@ -1,6 +1,7 @@
 <?php
     include '../../actions/middleware/app.php'; 
     include '../../actions/middleware/authenticate.php';
+    include '../../actions/middleware/print_array.php';
 
     include '../../config/Database.php';
     include '../../models/Post.php';
@@ -8,7 +9,6 @@
     include '../../controllers/UserController.php';
 
     $user = new UserController();
-    $post = new PostController();
 
     // Fetching Tables
     $users = $user->getUsers();
@@ -18,32 +18,25 @@
     // filtering posts so only friends's posts will display
     $filteredPosts = array();
 
-    if($friends != 'No Friends Found'){
-        foreach($posts as $post){
-            foreach($friends as $friend){
-                if($post['user_id'] == $friend['friend_id']){
-                    array_push($filteredPosts, $post);
-                }
-            }
-        }
-    }
-
     // filtering users to sent them request
-    $notFriends = array();
+    $users_to_display = $users;
 
-    foreach($user as $user){
-        foreach($friends as $friend){
-            if($user['id'] == $friend['friend_id']){
-                array_push($notFriends, $user);
-            }
-        }
-    }
+
+    $loginUser = array_search($_SESSION['user'] , $users_to_display);
+    echo $loginUser;
+    print_array("USERS", $users_to_display);
+
+    unset($users_to_display[$loginUser]);
+
+
 ?>
+    
+
 
 <!-- Searched Content -->
 <div class="row mt-4">
     <div class="col-md-12">
-        <?php foreach($users as $user): ?>
+        <?php foreach($users_to_display as $user): ?>
             <div class="card">
                 <div class="card-body">
                     <div class="row">

@@ -55,11 +55,8 @@ footer{
 }
 
 /*profile page styles*/
-
 .user-image{
     cursor: zoom-in;
-    border-radius: 100px;
-    padding: 20;
 }
 .user-image:hover{
     opacity: 0.8;
@@ -87,6 +84,7 @@ footer{
 .user-post-image{
     width: 60px;
     height: 60px;
+    overflow: hidden;
 }
 
 .mob-nav{
@@ -139,4 +137,65 @@ footer{
 .edit-post-image:hover{
     opacity: 0.7;
     transition: 0.1s;
+}
+
+
+/* Loader CSS start*/
+.loader {
+    
+    margin: 0px auto;
+    width:50px;
+    height:50px;
+    display:inline-block;
+    padding:0px;
+    opacity:0.5;
+    border:3px solid #09acfd;
+    -webkit-animation: loader 1s ease-in-out infinite alternate;
+    animation: loader 1s ease-in-out infinite alternate;
+ }
+ 
+ .loader:before {
+   content: " ";
+   position: absolute;
+   z-index: -1;
+   top: 5px;
+   left: 5px;
+   right: 5px;
+   bottom: 5px;
+   border: 3px solid #09acfd;
+ }
+ 
+ .loader:after {
+   content: " ";
+   position: absolute;
+   z-index: -1;
+   top: 15px;
+   left: 15px;
+   right: 15px;
+   bottom: 15px;
+   border: 3px solid #09acfd;
+ }
+ 
+ @keyframes loader {
+    from {transform: rotate(0deg) scale(1,1);border-radius:0px;}
+    to {transform: rotate(360deg) scale(0, 0);border-radius:50px;}
+ }
+ @-webkit-keyframes loader {
+    from {-webkit-transform: rotate(0deg) scale(1, 1);border-radius:0px;}
+    to {-webkit-transform: rotate(360deg) scale(0,0 );border-radius:50px;}
+ }
+/* Loader CSS end */
+
+
+.loader-container{
+    height: 200px;
+  line-height: 200px;
+  text-align: center;
+ /* border: 2px dashed #f69c55; */
+}
+
+.loader-inner-container{
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
 }

@@ -1,6 +1,8 @@
 <?php
     include '../actions/middleware/app.php';
     include '../actions/middleware/authenticate.php';
+
+    
 ?>
 
 <!DOCTYPE html>

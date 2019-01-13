@@ -89,9 +89,12 @@
                             <?php foreach($users as $user): ?>
                                 <?php if($post['user_id'] == $user['id']): ?>
                                     <div class="col-xs-3">
-                                        <img src="<?php echo $root ?>include/images/users/<?php echo $user['image'] ?>" 
-                                             class="img-fluid img-thumbnail user-post-image"
-                                        >
+                                        <div class="user-post-image">
+                                            <img src="<?php echo $root ?>include/images/users/<?php echo $user['image'] ?>" 
+                                                class="img-fluid img-thumbnail"
+                                            >
+                                        </div>
+                                        
                                     </div>
                                     <div class="col-xs-7">
                                         <label class="text-capitalize font-weight-bold ml-2 p-2 mt-2 name-feed" 

@@ -361,5 +361,24 @@ class UserController extends Database{
 
   }
 
+  public function updateProfilePicture($imageName, $user){
+    
+    $query = 'UPDATE users SET image=:image WHERE id=:id';
+
+    $stmt = $this->connect()->prepare($query);
+
+    $stmt->bindParam(':image', $imageName);
+    $stmt->bindParam(':id', $user);
+
+    if($stmt->execute()){
+      return true;
+    }
+
+    // Print error if something goes wrong
+    $message = "Error: %s.\n". $stmt->error;
+    return $message; 
+
+  }
+
 }
 

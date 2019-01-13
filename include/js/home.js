@@ -2,8 +2,12 @@
 const root = 'http://localhost/MiConnect/';
 
 // on load
+$('.loader-container').hide();
+
 $(function(){
+    $('.loader-container').show();
     $('#view').load( root + 'views/components/_newsFeed.php');
+    $('.loader-container').hide();
 });
 
 // this function will load news feed view
@@ -563,6 +567,101 @@ function searchFriend(){
 function loadUsers(){
     $('#viewFriends').load( root + 'views/components/_usersList.php');
 }
+
+// load file event [will be fired from profile's change profile photo section]
+function loadFileForProfile(){
+
+    const realFileBtn = document.querySelector('#profileImage');
+    const customText = document.querySelector('#customText_ForProfile');
+
+    realFileBtn.click();
+
+    realFileBtn.addEventListener('change', function(){
+        if(realFileBtn.value){
+
+            $('#fileSelectedDisplay_ForProfile').show();
+
+            var file = parsePath(realFileBtn.value);
+
+            customText.innerHTML = file.name;
+            var validImage = validateImage(file.extension);
+            if(!validImage){
+                $.alert('Please Select A File of <br> .jpg  .png  .jpeg  .gif ');
+                discardFile();
+            }
+
+            // enabling submit button
+            document.querySelector('#profileImage_SubmitBtn').disabled = false;
+        }else{
+
+            $('#fileSelectedDisplay_ForProfile').hide();
+
+            customText.innerHTML = '';
+
+            // disabling submit button
+            document.querySelector('#profileImage_SubmitBtn').disabled = true;
+        }
+    });
+
+}
+
+// discard file event [will be fired from profile's change profile photo section]
+function discardFileForProfile(){
+    const realFileBtn = document.querySelector('#profileImage');
+    const customText = document.querySelector('#customText_ForProfile');
+
+    realFileBtn.value = '';
+    customText.innerHTML = realFileBtn.value;
+
+    $('#fileSelectedDisplay_ForProfile').hide();
+
+    // disabling submit button
+    document.querySelector('#profileImage_SubmitBtn').disabled = true;
+}
+
+// this function will update the profile picture
+function submitProfilePicture(){
+    const image = document.querySelector('#profileImage');
+    const imageName = document.querySelector('#customText_ForProfile');
+
+    var formData = new FormData();
+    formData.append('file', $('#profileImage')[0].files[0]);
+    formData.append('submit', 'submit');
+
+    $.ajax({
+        url : root + 'actions/user/updateProfileImageAction.php',
+        type : 'POST',
+        data : formData,
+        processData: false,  // tell jQuery not to process the data
+        contentType: false,  // tell jQuery not to set contentType
+        success : function(data) {
+            // showing successfull message
+            $.alert(data);
+        }
+    });
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function editPost(id){
 
