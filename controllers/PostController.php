@@ -195,7 +195,52 @@ class PostController extends Database{
       return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function updatePostBody($body, $postId){
+      $query = 'UPDATE posts SET body = :body where id = :postId';
 
+      $stmt = $this->connect()->prepare($query);
+
+      $stmt->bindParam(':body', $body);
+      $stmt->bindParam(':postId', $postId);
+
+      if($stmt->execute()){
+        return true;
+      }
+
+      return false;
+    }
+
+    public function uploadPostBodyAndImage($body, $postId, $image){
+      $query = 'UPDATE posts SET body = :body, image = :image where id = :postId';
+
+      $stmt = $this->connect()->prepare($query);
+
+      $stmt->bindParam(':body', $body);
+      $stmt->bindParam(':postId', $postId);
+      $stmt->bindParam(':image', $image);
+
+      if($stmt->execute()){
+        return true;
+      }
+
+      return false;
+    }
+
+    public function updatePost($body, $image, $postId){
+      $query = 'UPDATE posts SET body = :body, image = :image where id = :postId';
+
+      $stmt = $this->connect()->prepare($query);
+
+      $stmt->bindParam(':body', $body);
+      $stmt->bindParam(':postId', $postId);
+      $stmt->bindParam(':image', $image);
+
+      if($stmt->execute()){
+        return true;
+      }
+
+      return false;
+    }
 
   }
   

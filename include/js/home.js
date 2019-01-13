@@ -642,60 +642,45 @@ function submitProfilePicture(){
     
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// this function will paste the content of the post (which is to be edited) to the edit post modal
 function editPost(id){
 
     const postBody = $('#postBody'+id).html();
     const postImage = $('#postImage'+id);
+    const imageName = $('#postImageName'+id).val();
     
-    $('#editBody').html(postBody);
+    $('#editBody').val(postBody);
 
     var src = $('#postImage'+id).attr('src');
     if(src){
         $('#editPostImageDisplay').attr("src", src);
         $('#editPostImageRow').show();
-        $('#openFileBtn').hide();    
+        $('#openFileBtn').hide();   
+        $('#imageNameToUpload').val(imageName);
     }
     else{
         $('#editPostImageRow').hide();
-        $('#openFileBtn').show();    
+        $('#openFileBtn').show();  
+        $('#imageNameToUpload').val('');  
     }
     
     $('#editFileSelectedDisplay').hide();
 
+    $('#postIdToUpload').val(id);
+
 }
 
-
-function enableEditSubmitBtn(){
-    document.querySelector('#editPostSubmitBtn').disabled = false;
-}
-
+// this function will load the file in edit post modal
 function loadEditFile(){
 
     const realFileBtn = document.querySelector('#editPostImage');
     const customText = document.querySelector('#editCustomText');
+    const currentImage = $('#editPostImageRow');
+    const openFileBtn = $('#openFileBtn');
 
     realFileBtn.click();
+    currentImage.hide();
+    openFileBtn.show();
 
     realFileBtn.addEventListener('change', function(){
         if(realFileBtn.value){
@@ -713,6 +698,8 @@ function loadEditFile(){
 
             // enabling submit button
             document.querySelector('#editPostSubmitBtn').disabled = false;
+
+            $('#imageNameToUpload').val('');
         }else{
 
             $('#editFileSelectedDisplay').hide();
@@ -726,6 +713,7 @@ function loadEditFile(){
 
 }
 
+// this function will discard the file in edit post modal
 function discardEditFile(){
     const realFileBtn = document.querySelector('#editPostImage');
     const customText = document.querySelector('#editCustomText');
@@ -735,6 +723,38 @@ function discardEditFile(){
 
     $('#editFileSelectedDisplay').hide();
 
-    // disabling submit button
-    document.querySelector('#editPostSubmitBtn').disabled = true;
 }
+
+// this function will update the post
+function submitEditPost(){
+    const image = document.querySelector('#editPostImage');
+    const body = document.querySelector('#editBody');
+    const imageName = document.querySelector('#editCustomText');
+    const postId = $('#postIdToUpload').val();
+
+    var formData = new FormData();
+    formData.append('body', body.value);
+    
+    if($('#imageNameToUpload').val() == ''){
+        formData.append('file', $('#editPostImage')[0].files[0]);
+    }
+    else{
+        formData.append('prevImg', $('#imageNameToUpload').val());
+    }
+
+    formData.append('postId', postId);
+    formData.append('submit', 'submit');
+
+    $.ajax({
+        url : root + 'actions/posts/updatePostAction.php',
+        type : 'POST',
+        data : formData,
+        processData: false,  // tell jQuery not to process the data
+        contentType: false,  // tell jQuery not to set contentType
+        success : function(data) {
+            $.alert(data);
+        }
+    });
+    
+}
+

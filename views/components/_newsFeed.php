@@ -121,6 +121,12 @@
                                         id="postImage<?php echo $post['id'] ?>"
                                         style="max-height: 500px;"
                                     >
+                                    <input type="text" 
+                                           value="<?php echo $post['image'] ?>"
+                                           disabled="disabled"
+                                           id="postImageName<?php echo $post['id'] ?>"
+                                           hidden="hidden"
+                                    >
                                 </div>
                             </div>
                         <?php endif ?>
@@ -231,23 +237,26 @@
             <div class="modal-body">
                 <form id="editPostForm">
                     <div class="form-group">
-                        <textarea name="editBody" id="editBody" cols="30" rows="5" class="form-control" onkeyup="enableEditSubmitBtn()"></textarea>
+                        <textarea name="editBody" id="editBody" cols="30" rows="5" class="form-control"></textarea>
                     </div>
 
                     <div class="row" id="editPostImageRow">
                         <div class="col-md-12" >
                             
                             <img src="" 
-                                    id="editPostImageDisplay" 
-                                    class="img-fluid mx-auto d-block edit-post-image" 
-                                    data-toggle="tooltip" 
-                                    title="Click to change Image"
-                                    alt="post-image" 
-                                    onclick="loadEditFile()"
+                                 id="editPostImageDisplay" 
+                                 class="img-fluid mx-auto d-block edit-post-image" 
+                                 data-toggle="tooltip" 
+                                 title="Click to change Image"
+                                 alt="post-image" 
+                                 onclick="loadEditFile()"
                             >
                             
                         </div>
                     </div>
+
+                    <input type="text" value="" id="imageNameToUpload" disabled="disabled" hidden="hidden">
+                    <input type="text" value="" id="postIdToUpload" disabled="disabled" hidden="hidden">
 
                     <div class="form-group">
                         <input type="file" name="editPostImage" id="editPostImage" hidden="hidden">

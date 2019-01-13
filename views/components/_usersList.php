@@ -23,8 +23,8 @@
 
 
     $loginUser = array_search($_SESSION['user'] , $users_to_display);
-    echo $loginUser;
-    print_array("USERS", $users_to_display);
+   // echo $loginUser;
+    //print_array("USERS", $users_to_display);
 
     unset($users_to_display[$loginUser]);
 
