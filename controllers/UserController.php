@@ -269,11 +269,13 @@ class UserController extends Database{
     // Deleting The request From Request Table
     $queryReq = 'delete from requests 
                  where
-                 user_id = :userId';
+                 user_id = :userId
+                 and req_id = :req_id';
 
     $stmtReq = $this->connect()->prepare($queryReq);
 
     $stmtReq->bindParam(':userId', $sender);
+    $stmtReq->bindParam(':req_id', $acceptor);
 
     if($stmtReq->execute()){
       $reqDeleted = true;
@@ -293,6 +295,21 @@ class UserController extends Database{
 
   public function getRequests($id){
     $query = 'select * from requests where req_id = '. $id;
+    $result = $this->connect()->query($query);
+    $num = $result->rowCount();
+    if($num > 0 ){
+      while($row = $result->fetch(PDO::FETCH_ASSOC)){
+        $data[] = $row;
+      }
+      return $data;
+    } 
+    else{
+      return 'No Requests Found';
+    }
+  }
+
+  public function getRequestsofUser($id){
+    $query = 'select * from requests where user_id = '. $id;
     $result = $this->connect()->query($query);
     $num = $result->rowCount();
     if($num > 0 ){
@@ -356,7 +373,8 @@ class UserController extends Database{
     }
 
     // Print error if something goes wrong
-    $message = "Error: %s.\n". $stmt->error;
+    //$message = "Error: %s.\n". $stmt->error;
+    $message = false;
     return $message;
 
   }
@@ -381,4 +399,3 @@ class UserController extends Database{
   }
 
 }
-

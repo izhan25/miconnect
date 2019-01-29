@@ -5,6 +5,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,9 +18,10 @@
     <!-- My Style-->
     <link rel="stylesheet" href="../include/css/myStyle.css">
 </head>
+
 <body>
 
-    <!-- Navbar -->   
+    <!-- Navbar -->
     <?php
         include 'components/_navbar.php';
     ?>
@@ -29,10 +31,14 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <img src="../include/images/<?php echo $_SESSION['user']['image'] ?>" 
-                     alt="profile-image"
-                     class="img-fluid user-image"
-                >
+                <div class="row">
+                    <div class="col-md-12">
+                        <img src="<?php echo $root ?>include/images/users/<?php echo $_SESSION['user']['image'] ?>"
+                            class="img-fluid img-thumbnail mx-auto d-block" alt="Profile_Image" data-toggle="modal"
+                            data-target="#showImage" width="200px">
+                    </div>
+
+                </div>
             </div>
             <div class="col-md-6">
                 <div class="row">
@@ -71,12 +77,13 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <button class="btn btn-default btn-sm float-right" style="border-radius: 5px;" data-toggle="modal" data-target="#editProfile">Edit Profile</button>
+                        <button class="btn btn-default btn-sm float-right" style="border-radius: 5px;"
+                            data-toggle="modal" data-target="#editProfile">Edit Profile</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>   
+    </div>
 
 
     <!-- Modal change picture-->
@@ -86,7 +93,7 @@
                 <div class="modal-header text-center">
                     <h5 class="modal-title text-center" id="image">Update Profile Photo</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -95,7 +102,8 @@
                             <input type="file" id="selectedImage" name="selectedImage" class="form-control">
                         </div>
                         <div class="form-group">
-                            <input type="submit" id="submitImage" name="submitImage" value="Update Image" class="btn btn-index btn-block btn-primary mt-4">
+                            <input type="submit" id="submitImage" name="submitImage" value="Update Image"
+                                class="btn btn-index btn-block btn-primary mt-4">
                         </div>
                     </form>
                 </div>
@@ -113,26 +121,31 @@
                 <div class="modal-header text-center">
                     <h5 class="modal-title text-center" id="profile">Update Profile Info</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="/MiConnect/actions/user/updateImageAction.php" id="signupForm" method="POST" name="registration">
+                    <form action="/MiConnect/actions/user/updateImageAction.php" id="signupForm" method="POST"
+                        name="registration">
                         <div class="form-group">
                             <label>User Name</label>
-                            <input type="text" id="userName" value="<?php echo $_SESSION['user']['user_name'] ?>" name="userName" placeholder=""  autocomplete="off" autofocus="on" class="form-control">
+                            <input type="text" id="userName" value="<?php echo $_SESSION['user']['user_name'] ?>"
+                                name="userName" placeholder="" autocomplete="off" autofocus="on" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>Full Name</label>
-                            <input type="text" id="fullName" value="<?php echo $_SESSION['user']['full_name'] ?>" name="fullName" placeholder="" autocomplete="off" class="form-control">
+                            <input type="text" id="fullName" value="<?php echo $_SESSION['user']['full_name'] ?>"
+                                name="fullName" placeholder="" autocomplete="off" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>E-mail</label>
-                            <input type="email" id="email" value="<?php echo $_SESSION['user']['email'] ?>" name="email" placeholder="" autocomplete="off" class="form-control">
+                            <input type="email" id="email" value="<?php echo $_SESSION['user']['email'] ?>" name="email"
+                                placeholder="" autocomplete="off" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>Contact</label>
-                            <input type="text" id="contact" value="<?php echo $_SESSION['user']['contact'] ?>" name="contact" placeholder="03328831270"  autocomplete="off" class="form-control">
+                            <input type="text" id="contact" value="<?php echo $_SESSION['user']['contact'] ?>"
+                                name="contact" placeholder="03328831270" autocomplete="off" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>Gender</label>
@@ -143,7 +156,7 @@
                                 <span>Female</span>
                             </div>
                         </div>
-                                    
+
                         <label>Date of Birth</label>
                         <div class="row" id="birthdateDisplay">
                             <div class="col-md-12">
@@ -190,7 +203,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-4">
-                                    <select id="month"  name="month" class="form-control">
+                                    <select id="month" name="month" class="form-control">
                                         <option value="">Month</option>
                                         <option value="jan">January</option>
                                         <option value="feb">February</option>
@@ -250,13 +263,15 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <button id="discardBirthDate" class="btn btn-sm btn-default float-right">Discard</button>
+                                    <button id="discardBirthDate"
+                                        class="btn btn-sm btn-default float-right">Discard</button>
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="wthree-text"> 
-                            <input type="submit" id="signup" name="submit" value="Submit" class="btn btn-index btn-block btn-primary mt-4 mb-2">
+
+                        <div class="wthree-text">
+                            <input type="submit" id="signup" name="submit" value="Submit"
+                                class="btn btn-index btn-block btn-primary mt-4 mb-2">
                         </div>
                     </form>
                 </div>
@@ -266,7 +281,7 @@
             </div>
         </div>
     </div>
-    
+
 
 
 
@@ -282,4 +297,5 @@
     <script src="../include/js/profile.js"> </script>
 
 </body>
+
 </html>
