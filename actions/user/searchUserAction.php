@@ -7,11 +7,11 @@ include '../middleware/app.php';
 
 error_reporting(0);
 
+$user = new UserController();
+
 if(isset($_POST['submit']) && !empty($_POST['submit']) ){
     
     $seacrhItem = htmlspecialchars(strip_tags($_POST['searchItem']));
-    
-    $user = new UserController();
     
     $users_to_display = $user->searchUser($seacrhItem);
 
@@ -40,6 +40,14 @@ if(isset($_POST['submit']) && !empty($_POST['submit']) ){
                 </div>
                 <div class="row mt-1">
                     <div class="col-md-12">
+                        <?php
+                            // $friends = $user->getFriends($_SESSION['user']['id']);
+                            // $btnText = 'Send Request';
+
+                            // foreach($friends as $friends){
+                            //     // if($friend['friend_id'] == $user)
+                            // }
+                         ?>
                         <button class="btn btn-primary btn-sm float-right text-capitalize"
                             id="<?php echo $user['id'] ?>" onclick="sendRequest('<?php echo $user['id'] ?>')">
                             Send Request
