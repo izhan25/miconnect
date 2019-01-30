@@ -1,10 +1,10 @@
 <?php 
   class Database {
     // DB Params
-    private $host = 'localhost';
+    private $host = 'den1.mysql1.gear.host';
     private $db_name = 'miconnect';
-    private $username = 'root';
-    private $password = '1234';
+    private $username = 'miconnect';
+    private $password = 'Bg5e~V_qNBh8';
     private $conn;
 
     // DB Connect

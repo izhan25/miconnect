@@ -1,18 +1,18 @@
 // Global Routes
-const root = 'http://localhost/MiConnect/';
+const root = '//http://miconnect.gearhostpreview.com/';
 
 // on load
 $('.loader-container').hide();
 
-$(function(){
+$(function () {
     $('.loader-container').show();
-    $('#view').load( root + 'views/components/_newsFeed.php');
+    $('#view').load(root + 'views/components/_newsFeed.php');
     $('.loader-container').hide();
 });
 
 // this function will load news feed view
-function loadFeed(){
-    $('#view').load( root + 'views/components/_newsFeed.php');
+function loadFeed() {
+    $('#view').load(root + 'views/components/_newsFeed.php');
 
     // managing selected css class
     $('.option-feed').addClass('selected');
@@ -25,8 +25,8 @@ function loadFeed(){
 // Event Listeners for Views
 $('.feedBtn').click(loadFeed);
 
-$('.friendsBtn').click(function(){
-    $('#view').load( root + 'views/components/_findFriends.php');
+$('.friendsBtn').click(function () {
+    $('#view').load(root + 'views/components/_findFriends.php');
 
     // managing selected css class
     $('.option-feed').removeClass('selected');
@@ -36,8 +36,8 @@ $('.friendsBtn').click(function(){
     $('.option-album').removeClass('selected');
 });
 
-$('.RequestBtn').click(function(){
-    $('#view').load( root + 'views/components/_requests.php');
+$('.RequestBtn').click(function () {
+    $('#view').load(root + 'views/components/_requests.php');
 
     // managing selected css class
     $('.option-feed').removeClass('selected');
@@ -47,8 +47,8 @@ $('.RequestBtn').click(function(){
     $('.option-album').removeClass('selected');
 });
 
-$('.ProflileBtn').click(function(){
-    $('#view').load( root + 'views/components/_profile.php');
+$('.ProflileBtn').click(function () {
+    $('#view').load(root + 'views/components/_profile.php');
 
     // managing selected css class
     $('.option-feed').removeClass('selected');
@@ -58,73 +58,73 @@ $('.ProflileBtn').click(function(){
     $('.option-album').removeClass('selected');
 });
 
-$('.AlbumBtn').click(function(){
-    $('#view').load( root + 'views/components/_album.php');
+$('.AlbumBtn').click(function () {
+    $('#view').load(root + 'views/components/_album.php');
 
-   // managing selected css class
-   $('.option-feed').removeClass('selected');
-   $('.option-friends').removeClass('selected');
-   $('.option-request').removeClass('selected');
-   $('.option-profile').removeClass('selected');
-   $('.option-album').addClass('selected');
+    // managing selected css class
+    $('.option-feed').removeClass('selected');
+    $('.option-friends').removeClass('selected');
+    $('.option-request').removeClass('selected');
+    $('.option-profile').removeClass('selected');
+    $('.option-album').addClass('selected');
 });
 
 
 // Sending Request Function
-function sendRequest(name){
+function sendRequest(name) {
     $.ajax({
         type: "GET",
-        url:  root + "actions/user/sendRequestAction.php",
+        url: root + "actions/user/sendRequestAction.php",
         data: {
-            user_id : name
+            user_id: name
         },
-        dataType:'JSON', 
-        success: function(response){
-            var btn = $('#'+response.requested);
+        dataType: 'JSON',
+        success: function (response) {
+            var btn = $('#' + response.requested);
             btn.html(response.message);
             btn.removeClass('btn-primary');
             btn.addClass('btn-default');
         },
-        error: function(e){
+        error: function (e) {
             console.log(e.responseText);
         }
     });
 }
 
 // Back to home [ will be clicked from profiles page ]
-function backToHome(){
+function backToHome() {
     window.location = root;
 }
 
 // Displaying Profile [will be clicked from news feed page]
-function displayProfile(name){
+function displayProfile(name) {
     window.location = root + 'views/profiles.php?user=' + name;
 }
 
 
 // Accept Request
-function acceptRequest(id){
+function acceptRequest(id) {
     $.ajax({
         type: "GET",
-        url:  root + "actions/user/acceptRequestAction.php",
+        url: root + "actions/user/acceptRequestAction.php",
         data: {
-            user_id : id
+            user_id: id
         },
-        dataType:'JSON', 
-        success: function(response){
-            var btn = $('#'+response.requested);
+        dataType: 'JSON',
+        success: function (response) {
+            var btn = $('#' + response.requested);
             btn.html(response.message);
             btn.removeClass('btn-primary');
             btn.addClass('btn-default');
         },
-        error: function(e){
+        error: function (e) {
             console.log(e.responseText);
         }
     });
 }
 
 // Log out 
-function logout(){
+function logout() {
     $.confirm({
         title: 'Confirm!',
         content: 'Are You Sure You Want To Log Out',
@@ -137,11 +137,11 @@ function logout(){
             }
         }
     });
-    
+
 }
 
 // Managing Gender Input
-function getGender(gender){
+function getGender(gender) {
     $('#genderInput').val(gender);
 }
 
@@ -177,7 +177,7 @@ $("form[name='registration']").validate({
             required: true,
             minlength: 5
         },
-        repassword:{
+        repassword: {
             equalTo: "#password"
         },
         gender: "required",
@@ -185,7 +185,7 @@ $("form[name='registration']").validate({
         month: "required",
         year: "required"
     },
-    
+
     messages: {
         userName: {
             required: "Please provde a user name",
@@ -200,7 +200,7 @@ $("form[name='registration']").validate({
             digits: "digits are not allowed here"
         },
         email: "Please enter a valid email address",
-        contact:{
+        contact: {
             required: "Please provde a contact number",
             minlength: "invalid phone number",
             maxlength: "invalid phone number",
@@ -217,42 +217,42 @@ $("form[name='registration']").validate({
         date: "!",
         month: "!",
         year: "!"
-        
+
     },
-    submitHandler: function(form) {
+    submitHandler: function (form) {
 
         $.ajax({
             type: "POST",
-            url:  root + "actions/user/signupAction.php",
+            url: root + "actions/user/signupAction.php",
             data: {
-                userName : $('#userName').val(),
-                fullName : $('#fullName').val(),
-                email : $('#email').val(),
-                contact : $('#contact').val(),
-                password : $('#password').val(),
-                gender : $('#genderInput').val(),
-                date : $('#date').val(),
-                month : $('#month').val(),
-                year : $('#year').val(),
-                submit : 'submit'
+                userName: $('#userName').val(),
+                fullName: $('#fullName').val(),
+                email: $('#email').val(),
+                contact: $('#contact').val(),
+                password: $('#password').val(),
+                gender: $('#genderInput').val(),
+                date: $('#date').val(),
+                month: $('#month').val(),
+                year: $('#year').val(),
+                submit: 'submit'
             },
-            dataType:'JSON', 
-            success: function(response){
+            dataType: 'JSON',
+            success: function (response) {
                 $('#signupRES').html(response.message);
-                if(response.message == 'You Have Successfully Signed Up'){
+                if (response.message == 'You Have Successfully Signed Up') {
                     $('#signupMessageBox').removeClass("error-validation");
                     $('#signupMessageBox').addClass("success-validation");
                 }
-                if(response.message == 'Email already exist.' || response.message == ' User Name already exist.' || response.message == 'Email User Name already exist.'){
+                if (response.message == 'Email already exist.' || response.message == ' User Name already exist.' || response.message == 'Email User Name already exist.') {
                     $('#signupMessageBox').removeClass("success-validation");
                     $('#signupMessageBox').addClass("error-validation");
                 }
             },
-            error: function(e){
+            error: function (e) {
                 $('#signupRES').html(e.responseText);
             }
         });
-        
+
         //form.submit();
     }
 });
@@ -274,7 +274,7 @@ $("form[name='login']").validate({
             required: true,
             minlength: 5
         },
-        
+
     },
     messages: {
         userName: {
@@ -288,48 +288,48 @@ $("form[name='login']").validate({
             minlength: "Your password must be at least 5 characters long"
         },
     },
-    submitHandler: function(form) {
-        
+    submitHandler: function (form) {
+
         $.ajax({
             type: "POST",
-            url:  root + "actions/user/signinAction.php",
+            url: root + "actions/user/signinAction.php",
             data: {
-                userName : $('#signinNAME').val(),
-                password : $('#signinPWD').val()
+                userName: $('#signinNAME').val(),
+                password: $('#signinPWD').val()
             },
-            dataType:'JSON', 
-            success: function(response){
+            dataType: 'JSON',
+            success: function (response) {
                 $('#signinRES').html(response.message);
-                if(response.message == 'User Not Found'){
+                if (response.message == 'User Not Found') {
                     $('#signinMessageBox').removeClass("success-validation");
                     $('#signinMessageBox').addClass("error-validation");
                 }
-                if(response.message == 'Signed In'){
+                if (response.message == 'Signed In') {
                     $('#signinMessageBox').removeClass("error-validation");
                     $('#signinMessageBox').addClass("success-validation");
                     window.location = response.url;
                 }
             },
-            error: function(e){
+            error: function (e) {
                 $('#signinRES').html(e.responseText);
             }
         });
-        
+
         //form.submit();
     }
 });
 
 
 // load file event [will be fired from news feed's create post section]
-function loadFile(){
+function loadFile() {
 
     const realFileBtn = document.querySelector('#postImage');
     const customText = document.querySelector('#customText');
 
     realFileBtn.click();
 
-    realFileBtn.addEventListener('change', function(){
-        if(realFileBtn.value){
+    realFileBtn.addEventListener('change', function () {
+        if (realFileBtn.value) {
 
             $('#fileSelectedDisplay').show();
 
@@ -337,14 +337,14 @@ function loadFile(){
 
             customText.innerHTML = file.name;
             var validImage = validateImage(file.extension);
-            if(!validImage){
+            if (!validImage) {
                 $.alert('Please Select A File of <br> .jpg  .png  .jpeg  .gif ');
                 discardFile();
             }
 
             // enabling submit button
             document.querySelector('#postSubmitBtn').disabled = false;
-        }else{
+        } else {
 
             $('#fileSelectedDisplay').hide();
 
@@ -358,9 +358,9 @@ function loadFile(){
 }
 
 // this function will check that the input file is image or not
-function validateImage(extension){
-   switch(extension){
-       case '.jpg':
+function validateImage(extension) {
+    switch (extension) {
+        case '.jpg':
             return true;
             break;
         case '.png':
@@ -375,11 +375,11 @@ function validateImage(extension){
         default:
             return false;
             break;
-   }
+    }
 }
 
 // This Function will extract the file name, path and extenxion from the path
-function parsePath (path) {
+function parsePath(path) {
     var parts = (/(\w?\:?\\?[\w\-_ \\]*\\+)?([\w-_ ]+)?(\.[\w-_ ]+)?/gi).exec(path);
     return {
         path: parts[0] || "",
@@ -390,7 +390,7 @@ function parsePath (path) {
 }
 
 // discard file event [will be fired from news feed's create post section]
-function discardFile(){
+function discardFile() {
     const realFileBtn = document.querySelector('#postImage');
     const customText = document.querySelector('#customText');
 
@@ -404,17 +404,17 @@ function discardFile(){
 }
 
 // this function will disable the create new post submit button if the post body is empty
-function enableSubmitBtn(){
-    if($('#body').val() == ''){
+function enableSubmitBtn() {
+    if ($('#body').val() == '') {
         document.querySelector('#postSubmitBtn').disabled = true;
     }
-    else{
+    else {
         document.querySelector('#postSubmitBtn').disabled = false;
     }
 }
 
 // this function will post the body and image of the post
-function submitPost(){
+function submitPost() {
     const image = document.querySelector('#postImage');
     const body = document.querySelector('#body');
     const imageName = document.querySelector('#customText');
@@ -425,47 +425,47 @@ function submitPost(){
     formData.append('submit', 'submit');
 
     $.ajax({
-        url : root + 'actions/posts/createPostAction.php',
-        type : 'POST',
-        data : formData,
+        url: root + 'actions/posts/createPostAction.php',
+        type: 'POST',
+        data: formData,
         processData: false,  // tell jQuery not to process the data
         contentType: false,  // tell jQuery not to set contentType
-        success : function(data) {
+        success: function (data) {
             $.alert(data);
         }
     });
-    
+
 }
 
 // This function will get the likes of post, this function will be called from likePost function
-function getLikesCount(id){
-    
+function getLikesCount(id) {
+
     $.ajax({
         url: root + 'actions/posts/getLikesCountAction.php',
         method: 'POST',
-        data : {
-            postId : id,
-            submit : 'submit'
+        data: {
+            postId: id,
+            submit: 'submit'
         },
-        dataType:'JSON', 
-        success: function(response){
+        dataType: 'JSON',
+        success: function (response) {
 
             var counter = '';
 
-            if(response.count == 0){
+            if (response.count == 0) {
                 $('#likesDisplay' + id).html(counter);
             }
-            else if(response.count == 1){
+            else if (response.count == 1) {
                 counter = response.count + ' like';
                 $('#likesDisplay' + id).html(counter);
             }
-            else{
+            else {
                 counter = response.count + ' likes';
                 $('#likesDisplay' + id).html(counter);
             }
-            
+
         },
-        error: function(e){
+        error: function (e) {
             console.log(e.responseText);
         }
     });
@@ -473,39 +473,39 @@ function getLikesCount(id){
 }
 
 // This function is responsible for managing the css class of like button and displaying count of likes for post
-function likePost(id){
-    
+function likePost(id) {
+
     $.ajax({
         url: root + 'actions/posts/likePostAction.php',
         method: 'POST',
-        data : {
-            postId : id,
-            submit : 'submit'
+        data: {
+            postId: id,
+            submit: 'submit'
         },
-        dataType:'JSON', 
-        success: function(response){
-            if(response.message){
-                $('#likeBtn'+ id).addClass('font-icon-selected');
+        dataType: 'JSON',
+        success: function (response) {
+            if (response.message) {
+                $('#likeBtn' + id).addClass('font-icon-selected');
                 getLikesCount(id);
             }
-            else if(!response.message){
-                $('#likeBtn'+ id).removeClass('font-icon-selected');
+            else if (!response.message) {
+                $('#likeBtn' + id).removeClass('font-icon-selected');
                 getLikesCount(id);
             }
-            else if(response.message == 'Error in unliking the post'){
+            else if (response.message == 'Error in unliking the post') {
                 console.log(response.message);
                 getLikesCount(id);
             }
         },
-        error: function(e){
+        error: function (e) {
             console.log(e.responseText);
         }
     });
-    
+
 }
 
 // This function will delete a post and remove its image from server
-function deletePost(id, image){
+function deletePost(id, image) {
 
     $.confirm({
         title: 'Confirm!',
@@ -515,16 +515,16 @@ function deletePost(id, image){
                 $.ajax({
                     url: root + 'actions/posts/deletePostAction.php',
                     method: 'POST',
-                    data : {
-                        postId : id,
+                    data: {
+                        postId: id,
                         imageName: image,
-                        submit : 'submit'
+                        submit: 'submit'
                     },
-                    dataType:'JSON', 
-                    success: function(response){
+                    dataType: 'JSON',
+                    success: function (response) {
                         $.alert(response);
                     },
-                    error: function(e){
+                    error: function (e) {
                         $.alert(e.responseText);
                     }
                 });
@@ -534,14 +534,14 @@ function deletePost(id, image){
             }
         }
     });
-    
+
 }
 
 // Search Friends function
-function searchFriend(){
+function searchFriend() {
     const search = $('#search').val();
 
-    if(search == ''){
+    if (search == '') {
         loadUsers();
         return false;
     }
@@ -549,35 +549,35 @@ function searchFriend(){
     $.ajax({
         url: root + 'actions/user/searchUserAction.php',
         method: 'POST',
-        data : {
-            searchItem : search ,
-            submit : 'submit'
+        data: {
+            searchItem: search,
+            submit: 'submit'
         },
-        dataType:'JSON',
-        success: function(response){
+        dataType: 'JSON',
+        success: function (response) {
             $('#viewFriends').html(response.responseText);
         },
-        error: function(e){
+        error: function (e) {
             $('#viewFriends').html(e.responseText);
         }
     });
 }
 
 // load users for find friends page
-function loadUsers(){
-    $('#viewFriends').load( root + 'views/components/_usersList.php');
+function loadUsers() {
+    $('#viewFriends').load(root + 'views/components/_usersList.php');
 }
 
 // load file event [will be fired from profile's change profile photo section]
-function loadFileForProfile(){
+function loadFileForProfile() {
 
     const realFileBtn = document.querySelector('#profileImage');
     const customText = document.querySelector('#customText_ForProfile');
 
     realFileBtn.click();
 
-    realFileBtn.addEventListener('change', function(){
-        if(realFileBtn.value){
+    realFileBtn.addEventListener('change', function () {
+        if (realFileBtn.value) {
 
             $('#fileSelectedDisplay_ForProfile').show();
 
@@ -585,14 +585,14 @@ function loadFileForProfile(){
 
             customText.innerHTML = file.name;
             var validImage = validateImage(file.extension);
-            if(!validImage){
+            if (!validImage) {
                 $.alert('Please Select A File of <br> .jpg  .png  .jpeg  .gif ');
                 discardFile();
             }
 
             // enabling submit button
             document.querySelector('#profileImage_SubmitBtn').disabled = false;
-        }else{
+        } else {
 
             $('#fileSelectedDisplay_ForProfile').hide();
 
@@ -606,7 +606,7 @@ function loadFileForProfile(){
 }
 
 // discard file event [will be fired from profile's change profile photo section]
-function discardFileForProfile(){
+function discardFileForProfile() {
     const realFileBtn = document.querySelector('#profileImage');
     const customText = document.querySelector('#customText_ForProfile');
 
@@ -620,7 +620,7 @@ function discardFileForProfile(){
 }
 
 // this function will update the profile picture
-function submitProfilePicture(){
+function submitProfilePicture() {
     const image = document.querySelector('#profileImage');
     const imageName = document.querySelector('#customText_ForProfile');
 
@@ -629,41 +629,41 @@ function submitProfilePicture(){
     formData.append('submit', 'submit');
 
     $.ajax({
-        url : root + 'actions/user/updateProfileImageAction.php',
-        type : 'POST',
-        data : formData,
+        url: root + 'actions/user/updateProfileImageAction.php',
+        type: 'POST',
+        data: formData,
         processData: false,  // tell jQuery not to process the data
         contentType: false,  // tell jQuery not to set contentType
-        success : function(data) {
+        success: function (data) {
             // showing successfull message
             $.alert(data);
         }
     });
-    
+
 }
 
 // this function will paste the content of the post (which is to be edited) to the edit post modal
-function editPost(id){
+function editPost(id) {
 
-    const postBody = $('#postBody'+id).html();
-    const postImage = $('#postImage'+id);
-    const imageName = $('#postImageName'+id).val();
-    
+    const postBody = $('#postBody' + id).html();
+    const postImage = $('#postImage' + id);
+    const imageName = $('#postImageName' + id).val();
+
     $('#editBody').val(postBody);
 
-    var src = $('#postImage'+id).attr('src');
-    if(src){
+    var src = $('#postImage' + id).attr('src');
+    if (src) {
         $('#editPostImageDisplay').attr("src", src);
         $('#editPostImageRow').show();
-        $('#openFileBtn').hide();   
+        $('#openFileBtn').hide();
         $('#imageNameToUpload').val(imageName);
     }
-    else{
+    else {
         $('#editPostImageRow').hide();
-        $('#openFileBtn').show();  
-        $('#imageNameToUpload').val('');  
+        $('#openFileBtn').show();
+        $('#imageNameToUpload').val('');
     }
-    
+
     $('#editFileSelectedDisplay').hide();
 
     $('#postIdToUpload').val(id);
@@ -671,7 +671,7 @@ function editPost(id){
 }
 
 // this function will load the file in edit post modal
-function loadEditFile(){
+function loadEditFile() {
 
     const realFileBtn = document.querySelector('#editPostImage');
     const customText = document.querySelector('#editCustomText');
@@ -682,8 +682,8 @@ function loadEditFile(){
     currentImage.hide();
     openFileBtn.show();
 
-    realFileBtn.addEventListener('change', function(){
-        if(realFileBtn.value){
+    realFileBtn.addEventListener('change', function () {
+        if (realFileBtn.value) {
 
             $('#editFileSelectedDisplay').show();
 
@@ -691,7 +691,7 @@ function loadEditFile(){
 
             customText.innerHTML = file.name;
             var validImage = validateImage(file.extension);
-            if(!validImage){
+            if (!validImage) {
                 $.alert('Please Select A File of <br> .jpg  .png  .jpeg  .gif ');
                 discardEditFile();
             }
@@ -700,7 +700,7 @@ function loadEditFile(){
             document.querySelector('#editPostSubmitBtn').disabled = false;
 
             $('#imageNameToUpload').val('');
-        }else{
+        } else {
 
             $('#editFileSelectedDisplay').hide();
 
@@ -714,7 +714,7 @@ function loadEditFile(){
 }
 
 // this function will discard the file in edit post modal
-function discardEditFile(){
+function discardEditFile() {
     const realFileBtn = document.querySelector('#editPostImage');
     const customText = document.querySelector('#editCustomText');
 
@@ -726,7 +726,7 @@ function discardEditFile(){
 }
 
 // this function will update the post
-function submitEditPost(){
+function submitEditPost() {
     const image = document.querySelector('#editPostImage');
     const body = document.querySelector('#editBody');
     const imageName = document.querySelector('#editCustomText');
@@ -734,11 +734,11 @@ function submitEditPost(){
 
     var formData = new FormData();
     formData.append('body', body.value);
-    
-    if($('#imageNameToUpload').val() == ''){
+
+    if ($('#imageNameToUpload').val() == '') {
         formData.append('file', $('#editPostImage')[0].files[0]);
     }
-    else{
+    else {
         formData.append('prevImg', $('#imageNameToUpload').val());
     }
 
@@ -746,15 +746,15 @@ function submitEditPost(){
     formData.append('submit', 'submit');
 
     $.ajax({
-        url : root + 'actions/posts/updatePostAction.php',
-        type : 'POST',
-        data : formData,
+        url: root + 'actions/posts/updatePostAction.php',
+        type: 'POST',
+        data: formData,
         processData: false,  // tell jQuery not to process the data
         contentType: false,  // tell jQuery not to set contentType
-        success : function(data) {
+        success: function (data) {
             $.alert(data);
         }
     });
-    
+
 }
 

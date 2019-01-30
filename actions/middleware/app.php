@@ -7,7 +7,7 @@ session_start();
 // ========= Routes ========== 
 
 // global url
-$root = 'http://localhost/MiConnect/';
+$root = 'http://miconnect.gearhostpreview.com/';
 
 // home
 $home = $root . 'views/home.php';
