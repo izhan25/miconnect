@@ -1,5 +1,5 @@
 // Global Routes
-const root = 'http://miconnect.gearhostpreview.com/';
+const root = 'http://localhost/MiConnect/';
 
 // on load
 $('.loader-container').hide();
