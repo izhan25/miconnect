@@ -59,10 +59,10 @@ open "config/Database.php" file and copy paste this,
 Note: if the above varibale are declared as given here then you are good to go,
 
 Extra information about these variable are as follows:
-    private $host = <Your domain name>;
-    private $db_name = <Database name>;
-    private $username = <Database user name>;
-    private $password = <Database user password>;
+        private $host = <Your domain name>;
+        private $db_name = <Database name>;
+        private $username = <Database user name>;
+        private $password = <Database user password>;
 
 
 
